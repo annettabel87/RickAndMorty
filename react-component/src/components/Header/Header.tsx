@@ -5,10 +5,16 @@ import './Header.css';
 export class Header extends React.Component {
   render() {
     return (
-      <header>
-        <NavLink to="/">Main</NavLink>
-        <NavLink to="/about">About Us</NavLink>
-        <NavLink to="/cards">Cards</NavLink>
+      <header className="header">
+        <NavLink className="header-item" to="/">
+          Main
+        </NavLink>
+        <NavLink className="header-item" to="/about">
+          About Us
+        </NavLink>
+        <NavLink className="header-item" to="/cards">
+          Cards
+        </NavLink>
       </header>
     );
   }
