@@ -1,9 +1,43 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Main.css';
 
+type MyState = {
+  inputValue: string;
+};
 export class Main extends React.Component {
+  state: MyState = {
+    inputValue: '',
+  };
+
+  componentDidMount() {
+    const oldInputValue = localStorage.getItem('inputValue');
+    this.setState({
+      inputValue: oldInputValue,
+    });
+  }
+  componentWillUnmount() {
+    localStorage.setItem('inputValue', this.state.inputValue);
+  }
+  saveValue(value: string) {
+    this.setState({
+      inputValue: value,
+    });
+  }
   render() {
-    return <h1>Main</h1>;
+    return (
+      <div className="search-wrapper">
+        <div className="search">
+          <input
+            className="search-input"
+            type="text"
+            placeholder={this.state.inputValue}
+            onChange={(e: React.FormEvent<HTMLInputElement>) => {
+              this.saveValue(e.currentTarget.value);
+            }}
+          ></input>
+          <button className="search-btn"></button>
+        </div>
+      </div>
+    );
   }
 }
