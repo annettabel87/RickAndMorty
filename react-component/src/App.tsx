@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Main } from './components/Main/Main';
 import { AboutUs } from './components/AboutUs/AboutUs';
@@ -10,10 +11,12 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Main />
-      <AboutUs />
-      <Cards />
-      <NotFound />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/cards" element={<Cards />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
