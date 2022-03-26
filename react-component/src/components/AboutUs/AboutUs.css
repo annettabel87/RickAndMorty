@@ -1,0 +1,9 @@
+.aboutUs-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.aboutUs-title {
+    font-size: 60px;    
+}
