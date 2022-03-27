@@ -1,0 +1,25 @@
+.card {
+    padding: 25px;
+    display: flex;
+    background-color: #99dee1cc;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.card-img {
+    width: 250px;
+}
+
+.card--description-item {
+    font-size: 21px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+.price {
+    background-color: #00b4cc;
+    border-radius: 6px;
+    font-size: 25px;
+    padding: 10px 10px;
+    font-weight: 700; 
+}
