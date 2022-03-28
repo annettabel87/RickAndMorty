@@ -30,7 +30,7 @@ export class Main extends React.Component {
           <input
             className="search-input"
             type="text"
-            placeholder={this.state.inputValue}
+            value={this.state.inputValue}
             onChange={(e: React.FormEvent<HTMLInputElement>) => {
               this.saveValue(e.currentTarget.value);
             }}

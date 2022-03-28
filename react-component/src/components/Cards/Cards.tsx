@@ -14,6 +14,11 @@ export class Cards extends React.Component {
   cardsElement = cardsData.map((data: ICardData) => <Card key={data.id.toString()} {...data} />);
 
   render() {
-    return <div className="cardsPage">{this.cardsElement}</div>;
+    return (
+      <div>
+        <h2 className="cardsPage-title">Lego</h2>
+        <div className="cardsPage">{this.cardsElement}</div>;
+      </div>
+    );
   }
 }

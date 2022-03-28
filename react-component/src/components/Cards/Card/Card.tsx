@@ -18,6 +18,7 @@ export class Card extends React.Component<ICardData> {
         </div>
         <div className="card--description-wrapper">
           <div className="card--description-item">#{this.props.id}</div>
+          <div className="card--description-item">Age: {this.props.name}</div>
           <div className="card--description-item">Details: {this.props.details}</div>
           <div className="card--description-item">Age: {this.props.age}</div>
           <div className="card--description-item price">Price: {this.props.price}</div>
