@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './NotFound.css';
 
 export class NotFound extends React.Component {

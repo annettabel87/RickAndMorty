@@ -1,6 +1,6 @@
 import React from 'react';
-import './Card.css';
 import { ICardData } from '../Cards';
+import './Card.css';
 
 export class Card extends React.Component<ICardData> {
   constructor(props: ICardData) {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import { Main } from './components/Main/Main';
 import { AboutUs } from './components/AboutUs/AboutUs';
 import { Cards } from './components/Cards/Cards';
 import { NotFound } from './components/NotFound/NotFound';
 import { Header } from './components/Header/Header';
 import { routers } from './constants';
+import './App.css';
 
 function App() {
   return (
