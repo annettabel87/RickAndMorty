@@ -6,16 +6,17 @@ import { AboutUs } from './components/AboutUs/AboutUs';
 import { Cards } from './components/Cards/Cards';
 import { NotFound } from './components/NotFound/NotFound';
 import { Header } from './components/Header/Header';
+import { routers } from './constants';
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/cards" element={<Cards />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={routers.ROUTE_MAIN} element={<Main />} />
+        <Route path={routers.ROUTE_ABOUT} element={<AboutUs />} />
+        <Route path={routers.ROUTE_CARDS} element={<Cards />} />
+        <Route path={routers.ROUTE_NOTFOUND} element={<NotFound />} />
       </Routes>
     </div>
   );
