@@ -15,6 +15,9 @@ export class Header extends React.Component {
         <NavLink className="header-item" to="/cards">
           Cards
         </NavLink>
+        <NavLink className="header-item" to="/form">
+          Form
+        </NavLink>
       </header>
     );
   }
