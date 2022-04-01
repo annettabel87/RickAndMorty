@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import './Main.css';
 
 type MyState = {
   inputValue: string;
 };
 export class Main extends React.Component {
-  state: MyState = {
-    inputValue: '',
-  };
+  state: MyState;
+  constructor(props = {}) {
+    super(props);
+    this.state = { inputValue: '' };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   componentDidMount() {
     const oldInputValue = localStorage.getItem('inputValue');
@@ -18,11 +22,10 @@ export class Main extends React.Component {
   componentWillUnmount() {
     localStorage.setItem('inputValue', this.state.inputValue);
   }
-  saveValue(value: string) {
-    this.setState({
-      inputValue: value,
-    });
+  handleChange(event: ChangeEvent<HTMLInputElement>) {
+    this.setState({ inputValue: event.target.value });
   }
+
   render() {
     return (
       <div className="search-wrapper">
@@ -31,9 +34,7 @@ export class Main extends React.Component {
             className="search-input"
             type="text"
             value={this.state.inputValue}
-            onChange={(e: React.FormEvent<HTMLInputElement>) => {
-              this.saveValue(e.currentTarget.value);
-            }}
+            onChange={this.handleChange}
           ></input>
           <button className="search-btn"></button>
         </div>
