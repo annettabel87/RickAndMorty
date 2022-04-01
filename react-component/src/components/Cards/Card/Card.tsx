@@ -7,21 +7,22 @@ export class Card extends React.Component<ICardData> {
     super(props);
   }
   render() {
+    const { id, name, price, age, details } = this.props;
     return (
       <div className="card">
         <div className="card--img-wrapper">
           <img
             className="card-img"
-            src={require(`../../../assets/cardsImg/${this.props.id}.jpg`)}
+            src={require(`../../../assets/cardsImg/${id}.jpg`)}
             alt="image"
           />
         </div>
         <div className="card--description-wrapper">
-          <div className="card--description-item">#{this.props.id}</div>
-          <div className="card--description-item">{this.props.name}</div>
-          <div className="card--description-item">Details: {this.props.details}</div>
-          <div className="card--description-item">Age: {this.props.age}</div>
-          <div className="card--description-item price">Price: {this.props.price}</div>
+          <div className="card--description-item">#{id}</div>
+          <div className="card--description-item">{name}</div>
+          <div className="card--description-item">Details: {details}</div>
+          <div className="card--description-item">Age: {age}</div>
+          <div className="card--description-item price">Price: {price}</div>
         </div>
       </div>
     );
