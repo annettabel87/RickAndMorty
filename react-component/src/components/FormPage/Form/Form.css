@@ -6,7 +6,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
-    height: 500px;
+    height: fit-content;
     border: 2px solid #ccc;
     gap: 10px;
     font-size: 16px;
@@ -70,4 +70,7 @@ input[type="checkbox"].input-switch:checked:before {
 
 .input-date, .input-file {
     margin-left: 10px;
+}
+.validation-error {
+    color: red;
 }

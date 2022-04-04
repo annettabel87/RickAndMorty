@@ -4,6 +4,6 @@ import { FormPage } from './FormPage';
 
 test('renders search component', () => {
   render(<FormPage />);
-  // const input = screen.getByRole('textbox');
-  // expect(input).toBeInTheDocument();
+  const input = screen.getAllByTestId(/name/i);
+  expect(input).toBeInTheDocument();
 });
