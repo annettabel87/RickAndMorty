@@ -5,10 +5,8 @@ import './FormCard.css';
 export class FormCard extends React.Component<IFormCard> {
   constructor(props: IFormCard) {
     super(props);
-    console.log(this.props.name);
   }
   render() {
-    console.log(this.props.name);
     const { name, surname, birth, country, gender, foto } = this.props;
     const reader = new FileReader();
     let src;
@@ -18,10 +16,9 @@ export class FormCard extends React.Component<IFormCard> {
     }
     reader.onloadend = (e) => {
       src = reader.result;
-      console.log(src);
     };
     return (
-      <div className="card">
+      <div className="card" data-testid="formCard">
         <div className="card--img-wrapper">
           <img className="card-img" src={url} alt="image" />/
         </div>
