@@ -26,7 +26,7 @@ export class FormPage extends React.Component<EmptyProps, State> {
 
   render() {
     return (
-      <div className="form-container">
+      <div className="form-container" data-testid="form-page">
         <Form addCardData={this.onAddCardData} />
         <CardsField {...this.state.cardData} />
       </div>

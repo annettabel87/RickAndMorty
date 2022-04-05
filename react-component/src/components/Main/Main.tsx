@@ -30,7 +30,7 @@ export class Main extends React.Component {
 
   render() {
     return (
-      <div className="search-wrapper">
+      <div className="search-wrapper" data-testid="main-page">
         <div className="search">
           <input
             className="search-input"

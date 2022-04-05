@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+import { Header } from './components/Header/Header';
 
 describe('test app', () => {
   test('Router test', () => {
@@ -10,17 +11,18 @@ describe('test app', () => {
         <App />
       </MemoryRouter>
     );
-    const mainLink = screen.getByText(/main/i);
-    const aboutLink = screen.getByText(/About Us/i);
+    const mainLink = screen.getByText(/Main/i);
+    const aboutLink = screen.getByText(/about/i);
     const cardsLink = screen.getByText(/cards/i);
-    // userEvent.click(aboutLink);
-    // expect(screen.getByText(/About Us/i));
+    const formLink = screen.getByText(/form/i);
+    userEvent.click(aboutLink);
+    expect(screen.getByTestId('about-page')).toBeInTheDocument();
     userEvent.click(cardsLink);
     expect(screen.getByText(/lego/i)).toBeInTheDocument();
     userEvent.click(mainLink);
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-    userEvent.click(aboutLink);
-    expect(screen.getByTestId('about-title')).toBeInTheDocument();
+    expect(screen.getByTestId('main-page')).toBeInTheDocument();
+    userEvent.click(formLink);
+    expect(screen.getByTestId('form-page')).toBeInTheDocument();
   });
 
   test('Error page test', () => {
