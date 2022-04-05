@@ -9,7 +9,7 @@ export class Card extends React.Component<ICardData> {
   render() {
     const { id, name, price, age, details } = this.props;
     return (
-      <div className="card">
+      <div className="card" data-testid="card">
         <div className="card--img-wrapper">
           <img
             className="card-img"
