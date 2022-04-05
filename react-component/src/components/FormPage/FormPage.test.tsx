@@ -4,6 +4,6 @@ import { FormPage } from './FormPage';
 
 test('renders search component', () => {
   render(<FormPage />);
-  const input = screen.getAllByTestId(/name/i);
-  expect(input).toBeInTheDocument();
+  const label = screen.getByText(/name/i);
+  expect(label).toBeInTheDocument();
 });

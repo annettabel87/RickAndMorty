@@ -15,9 +15,11 @@ export class Main extends React.Component {
 
   componentDidMount() {
     const oldInputValue = localStorage.getItem('inputValue');
-    this.setState({
-      inputValue: oldInputValue,
-    });
+    if (oldInputValue) {
+      this.setState({
+        inputValue: oldInputValue,
+      });
+    }
   }
   componentWillUnmount() {
     localStorage.setItem('inputValue', this.state.inputValue);
