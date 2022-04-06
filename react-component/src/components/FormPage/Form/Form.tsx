@@ -134,7 +134,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
 
   render() {
     return (
-      <form className="form" onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={this.handleSubmit} data-testid="form">
         <label htmlFor="name">
           Name:
           <input
@@ -143,6 +143,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             name="name"
             ref={this.nameInput}
             onChange={this.undisabledBtn}
+            data-testid="input-name"
           />
           <p>
             {' '}
@@ -159,6 +160,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             name="surname"
             ref={this.surnameInput}
             onChange={this.undisabledBtn}
+            data-testid="input-surname"
           />
           <p>
             {this.errors.surname !== undefined && (
@@ -180,6 +182,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             name="birth"
             ref={this.dateInput}
             onChange={this.undisabledBtn}
+            data-testid="input-birth"
           />
         </label>
         <label htmlFor="country">
@@ -190,7 +193,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
               <span className="validation-error">select country</span>
             )}{' '}
           </p>
-          <select ref={this.countryInput}>
+          <select ref={this.countryInput} data-testid="select-country">
             <option value="Russia">Russia</option>
             <option value="Belarus">Belarus</option>
             <option value="Ukraine">Ukraine</option>
@@ -204,7 +207,13 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             )}{' '}
           </p>
           <span className="switch--span">Male</span>
-          <input className="input-switch" type="checkbox" name="gender" ref={this.genderInput} />
+          <input
+            className="input-switch"
+            type="checkbox"
+            name="gender"
+            ref={this.genderInput}
+            data-testid="input-gender"
+          />
           <span className="switch--span">Female</span>
         </label>
         <label htmlFor="foto">
@@ -221,6 +230,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             name="foto"
             ref={this.fileInput}
             onChange={this.undisabledBtn}
+            data-testid="input-file"
           />
         </label>
         <label htmlFor="agree">
@@ -236,10 +246,11 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             name="agree"
             ref={this.agreeInput}
             onChange={this.undisabledBtn}
+            data-testid="input-agree"
           />
           I agree
         </label>
-        <button type="submit" disabled={true} ref={this.submitBtn}>
+        <button type="submit" disabled={true} ref={this.submitBtn} data-testid="form-btn">
           Submit
         </button>
       </form>

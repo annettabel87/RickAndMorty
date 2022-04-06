@@ -11,6 +11,10 @@ export class CardsField extends React.Component<IFormCard[]> {
   render() {
     const cardData = Array.from(Object.values(this.props));
     const elements = cardData.map((data: IFormCard) => <FormCard key={data.id} {...data} />);
-    return <div className="cardsField">{elements}</div>;
+    return (
+      <div className="cardsField" data-testid="cardField">
+        {elements}
+      </div>
+    );
   }
 }
