@@ -51,7 +51,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
     this.agreeInput = React.createRef<HTMLInputElement>();
     this.submitBtn = React.createRef<HTMLButtonElement>();
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.undisabledBtn = this.undisabledBtn.bind(this);
+    this.unDisabledBtn = this.unDisabledBtn.bind(this);
   }
 
   handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
@@ -71,7 +71,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
 
     this.validate();
     if (Object.keys(this.errors).length === 0) {
-      this.undisabledBtn();
+      this.unDisabledBtn();
       addCardData(this.newData);
       this.reset();
     } else {
@@ -80,7 +80,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
       }
     }
   }
-  undisabledBtn() {
+  unDisabledBtn() {
     if (this.submitBtn.current) {
       this.submitBtn.current.disabled = false;
     }
@@ -142,7 +142,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             type="text"
             name="name"
             ref={this.nameInput}
-            onChange={this.undisabledBtn}
+            onChange={this.unDisabledBtn}
             data-testid="input-name"
           />
           <p>
@@ -159,7 +159,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             type="text"
             name="surname"
             ref={this.surnameInput}
-            onChange={this.undisabledBtn}
+            onChange={this.unDisabledBtn}
             data-testid="input-surname"
           />
           <p>
@@ -181,7 +181,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             type="date"
             name="birth"
             ref={this.dateInput}
-            onChange={this.undisabledBtn}
+            onChange={this.unDisabledBtn}
             data-testid="input-birth"
           />
         </label>
@@ -229,7 +229,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             type="file"
             name="foto"
             ref={this.fileInput}
-            onChange={this.undisabledBtn}
+            onChange={this.unDisabledBtn}
             data-testid="input-file"
           />
         </label>
@@ -245,7 +245,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             type="checkbox"
             name="agree"
             ref={this.agreeInput}
-            onChange={this.undisabledBtn}
+            onChange={this.unDisabledBtn}
             data-testid="input-agree"
           />
           I agree
