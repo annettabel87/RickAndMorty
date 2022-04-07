@@ -118,16 +118,16 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
     if (this.newData.surname.length < validateConstants.MIN_LENGTH_NAME) {
       this.errors.surname = false;
     }
-    if (this.newData.birth === '') {
+    if (!this.newData.birth) {
       this.errors.birth = false;
     }
-    if (this.newData.country === '') {
+    if (!this.newData.country) {
       this.errors.country = false;
     }
-    if (this.newData.gender === '') {
+    if (!this.newData.gender) {
       this.errors.gender = false;
     }
-    if (this.newData.foto === null) {
+    if (!this.newData.foto) {
       this.errors.foto = false;
     }
     this.setState({ errors: this.errors });

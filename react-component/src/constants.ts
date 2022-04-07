@@ -7,5 +7,5 @@ export const routers = {
 };
 
 export const validateConstants = {
-  MIN_LENGTH_NAME: 2
+  MIN_LENGTH_NAME: 2,
 };
