@@ -10,7 +10,7 @@ export interface IFormCard {
   birth: string;
   country: string;
   gender: string;
-  foto: FileList | null;
+  photo: FileList | null;
   agree: boolean;
 }
 
@@ -39,7 +39,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
       birth: '',
       country: '',
       gender: '',
-      foto: null,
+      photo: null,
       agree: false,
     };
     this.errors = {};
@@ -66,7 +66,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
       birth: this.dateInput.current ? this.dateInput.current.value : '',
       country: this.countryInput.current ? this.countryInput.current.value : '',
       gender: this.genderInput.current?.checked ? 'Female' : 'Male',
-      foto: this.fileInput.current ? this.fileInput.current.files : null,
+      photo: this.fileInput.current ? this.fileInput.current.files : null,
       agree: this.agreeInput.current ? this.agreeInput.current.checked : false,
     };
 
@@ -127,7 +127,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
     if (!this.newData.gender) {
       this.errors.gender = false;
     }
-    if (!this.newData.foto) {
+    if (!this.newData.photo) {
       this.errors.foto = false;
     }
     this.setState({ errors: this.errors });

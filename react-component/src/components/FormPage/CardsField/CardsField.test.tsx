@@ -10,7 +10,7 @@ const data = [
     birth: '12.09.1987',
     country: 'Russia',
     gender: 'Female',
-    foto: null,
+    photo: null,
     agree: true,
   },
   {
@@ -20,7 +20,7 @@ const data = [
     birth: '12.09.1987',
     country: 'Russia',
     gender: 'Male',
-    foto: null,
+    photo: null,
     agree: true,
   },
 ];

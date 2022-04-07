@@ -7,12 +7,12 @@ export class FormCard extends React.Component<IFormCard> {
     super(props);
   }
   render() {
-    const { name, surname, birth, country, gender, foto } = this.props;
+    const { name, surname, birth, country, gender, photo } = this.props;
     const reader = new FileReader();
     let src;
     let url;
-    if (foto) {
-      url = URL.createObjectURL(foto[0]);
+    if (photo) {
+      url = URL.createObjectURL(photo[0]);
     }
     reader.onloadend = (e) => {
       src = reader.result;
