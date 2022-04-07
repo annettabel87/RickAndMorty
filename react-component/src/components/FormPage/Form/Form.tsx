@@ -1,4 +1,5 @@
 import React from 'react';
+import { validateConstants } from '../../../constants';
 import { IAddCardData } from '../FormPage';
 import './Form.css';
 
@@ -111,10 +112,10 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
     if (!this.newData.agree) {
       this.errors.agree = false;
     }
-    if (this.newData.name.length < 2) {
+    if (this.newData.name.length < validateConstants.MIN_LENGTH_NAME) {
       this.errors.name = false;
     }
-    if (this.newData.surname.length < 2) {
+    if (this.newData.surname.length < validateConstants.MIN_LENGTH_NAME) {
       this.errors.surname = false;
     }
     if (this.newData.birth === '') {

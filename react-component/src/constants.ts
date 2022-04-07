@@ -5,3 +5,7 @@ export const routers = {
   ROUTE_FORM: '/form',
   ROUTE_NOTFOUND: '*',
 };
+
+export const validateConstants = {
+  MIN_LENGTH_NAME: 2
+};
