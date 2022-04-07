@@ -108,7 +108,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
   validate() {
     this.setState({ errors: [] });
     this.errors = {};
-    if (this.newData.agree === false) {
+    if (!this.newData.agree) {
       this.errors.agree = false;
     }
     if (this.newData.name.length < 2) {
