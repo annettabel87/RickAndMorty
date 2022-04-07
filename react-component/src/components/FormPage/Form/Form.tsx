@@ -110,25 +110,25 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
     this.setState({ errors: [] });
     this.errors = {};
     if (!this.newData.agree) {
-      this.errors.agree = false;
+      this.errors.agree = true;
     }
     if (this.newData.name.length < validateConstants.MIN_LENGTH_NAME) {
-      this.errors.name = false;
+      this.errors.name = true;
     }
     if (this.newData.surname.length < validateConstants.MIN_LENGTH_NAME) {
-      this.errors.surname = false;
+      this.errors.surname = true;
     }
     if (!this.newData.birth) {
-      this.errors.birth = false;
+      this.errors.birth = true;
     }
     if (!this.newData.country) {
-      this.errors.country = false;
+      this.errors.country = true;
     }
     if (!this.newData.gender) {
-      this.errors.gender = false;
+      this.errors.gender = true;
     }
     if (!this.newData.photo) {
-      this.errors.foto = false;
+      this.errors.photo = true;
     }
     this.setState({ errors: this.errors });
   }
@@ -148,9 +148,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
           />
           <p>
             {' '}
-            {this.errors.name !== undefined && (
-              <span className="validation-error">your name too short</span>
-            )}{' '}
+            {this.errors.name && <span className="validation-error">your name too short</span>}{' '}
           </p>
         </label>
         <label htmlFor="surname">
@@ -164,19 +162,15 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
             data-testid="input-surname"
           />
           <p>
-            {this.errors.surname !== undefined && (
+            {' '}
+            {this.errors.surname && (
               <span className="validation-error">your surname too short</span>
-            )}
+            )}{' '}
           </p>
         </label>
         <label htmlFor="birth">
           Date of Birth:
-          <p>
-            {' '}
-            {this.errors.birth !== undefined && (
-              <span className="validation-error">select date</span>
-            )}{' '}
-          </p>
+          <p> {this.errors.birth && <span className="validation-error">select date</span>} </p>
           <input
             className="input-date"
             type="date"
@@ -188,12 +182,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
         </label>
         <label htmlFor="country">
           Country:
-          <p>
-            {' '}
-            {this.errors.country !== undefined && (
-              <span className="validation-error">select country</span>
-            )}{' '}
-          </p>
+          <p> {this.errors.country && <span className="validation-error">select country</span>} </p>
           <select ref={this.countryInput} data-testid="select-country">
             <option value="Russia">Russia</option>
             <option value="Belarus">Belarus</option>
@@ -201,12 +190,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
           </select>
         </label>
         <label className="switch-label-box" htmlFor="gender">
-          <p>
-            {' '}
-            {this.errors.gender !== undefined && (
-              <span className="validation-error">select again</span>
-            )}{' '}
-          </p>
+          <p> {this.errors.gender && <span className="validation-error">select again</span>} </p>
           <span className="switch--span">Male</span>
           <input
             className="input-switch"
@@ -217,18 +201,13 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
           />
           <span className="switch--span">Female</span>
         </label>
-        <label htmlFor="foto">
-          Load your foto
-          <p>
-            {' '}
-            {this.errors.foto !== undefined && (
-              <span className="validation-error">add foto</span>
-            )}{' '}
-          </p>
+        <label htmlFor="photo">
+          Load your photo
+          <p> {this.errors.photo && <span className="validation-error">add photo</span>} </p>
           <input
             className="input-file"
             type="file"
-            name="foto"
+            name="photo"
             ref={this.fileInput}
             onChange={this.unDisabledBtn}
             data-testid="input-file"
@@ -237,9 +216,7 @@ export class Form extends React.Component<IAddCardData, Record<string, unknown>>
         <label htmlFor="agree">
           <p>
             {' '}
-            {this.errors.agree !== undefined && (
-              <span className="validation-error">need your consent</span>
-            )}{' '}
+            {this.errors.agree && <span className="validation-error">need your consent</span>}{' '}
           </p>
           <input
             className="input-checkbox"
