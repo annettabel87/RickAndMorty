@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Main } from './Main';
+import { Search } from './Search';
 import userEvent from '@testing-library/user-event';
 
 interface Store {
@@ -39,24 +39,27 @@ class LocalStorageMock {
 
 describe('searchBar', () => {
   test('renders search component', () => {
-    render(<Main />);
+    render(<Search />);
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
   });
 
   test('render input if localStorage empty', () => {
-    render(<Main />);
+    render(<Search />);
     expect(screen.getByDisplayValue('')).toBeInTheDocument();
   });
 
   test('render value from localStorage if it contain them', () => {
     localStorage = new LocalStorageMock();
-    const { rerender } = render(<Main />);
+    const { rerender } = render(<Search />);
     userEvent.type(screen.getByDisplayValue(''), 'react');
-    rerender(<Main />);
+    rerender(<Search />);
     expect(screen.getByDisplayValue('react')).toBeInTheDocument;
   });
   test('onchange works', () => {
-    render(<Main />);
+    render(<Search />);
+    const input = screen.getByRole('textbox');
+    userEvent.type(input, 'React');
+    expect(screen.getByRole('textbox')).toContainHTML('React');
   });
 });
