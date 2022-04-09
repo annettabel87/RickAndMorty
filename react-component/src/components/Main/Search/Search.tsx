@@ -1,45 +1,28 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+import { ISearchProps } from '../Main';
 import './Search.css';
 
-type SearchState = {
-  inputValue: string;
-};
-export class Search extends React.Component {
-  state: SearchState;
-  constructor(props = {}) {
+export class Search extends React.Component<ISearchProps> {
+  constructor(props: ISearchProps) {
     super(props);
-    this.state = { inputValue: '' };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    const oldInputValue = localStorage.getItem('inputValue');
-    if (oldInputValue) {
-      this.setState({
-        inputValue: oldInputValue,
-      });
-    }
-  }
-  componentWillUnmount() {
-    localStorage.setItem('inputValue', this.state.inputValue);
-  }
-  handleChange(event: ChangeEvent<HTMLInputElement>) {
-    this.setState({ inputValue: event.target.value });
   }
 
   render() {
+    const { handleChange, handleSubmit, searchValue } = this.props;
     return (
       <div className="search-wrapper" data-testid="main-page">
-        <div className="search">
+        <form className="search" onSubmit={handleSubmit}>
+          <label htmlFor="search" />
+          Enter character name
           <input
             className="search-input"
             type="text"
-            value={this.state.inputValue}
-            onChange={this.handleChange}
+            value={searchValue}
+            onChange={handleChange}
+            name="search"
           ></input>
-          <button className="search-btn"></button>
-        </div>
+          <button className="search-btn" type="submit"></button>
+        </form>
       </div>
     );
   }

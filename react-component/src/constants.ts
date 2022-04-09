@@ -9,3 +9,9 @@ export const routers = {
 export const validateConstants = {
   MIN_LENGTH_NAME: 2,
 };
+export const apiConstants = {
+  baseUrl: 'https://rickandmortyapi.com/api',
+  characterUrl: 'https://rickandmortyapi.com/api/character',
+  locationUrl: 'https://rickandmortyapi.com/api/location',
+  episodeUrl: 'https://rickandmortyapi.com/api/episode',
+};
