@@ -1,0 +1,23 @@
+.main-card {
+    padding: 25px;
+    display: flex;
+    background-color: #99dee1cc;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.main-card-img {
+    width: 250px;
+}
+
+.main-card--description-item {
+    font-size: 21px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+.main-card--name {
+    color: rgb(32, 93, 226);
+    font-weight: 700;
+}

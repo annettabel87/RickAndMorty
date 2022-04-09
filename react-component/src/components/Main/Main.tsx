@@ -2,9 +2,10 @@ import React, { ChangeEvent } from 'react';
 import { Search } from './Search/Search';
 import { EmptyProps } from '../FormPage/FormPage';
 import { apiConstants } from '../../constants';
+import { CardsField } from './Cards/CardsField';
 import './Main.css';
 
-interface IRickAndMortyData {
+export interface IRickAndMortyData {
   id: number;
   name: string;
   status: string;
@@ -20,7 +21,7 @@ interface IRickAndMortyData {
     url: string;
   };
   image: string;
-  episode: [string];
+  episode: string[];
   url: string;
   created: string;
 }
@@ -32,6 +33,7 @@ type SearchState = {
 export interface ISearchProps {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: ChangeEvent<HTMLFormElement>) => void;
+  reset: () => void;
   searchValue: string;
 }
 export class Main extends React.Component<EmptyProps, SearchState> {
@@ -41,6 +43,7 @@ export class Main extends React.Component<EmptyProps, SearchState> {
     this.state = { data: [], searchValue: '', isLoaded: false };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   async componentDidMount() {
@@ -78,14 +81,22 @@ export class Main extends React.Component<EmptyProps, SearchState> {
       this.setState({ searchValue: '' });
     }
   }
+  reset() {
+    this.setState({
+      searchValue: '',
+    });
+  }
   render() {
     return (
       <div className="mainPage" data-testid="main-page">
+        <h2 className="mainPage-title">Rick and Morty</h2>
         <Search
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          reset={this.reset}
           searchValue={this.state.searchValue}
         />
+        <CardsField {...this.state.data} />
       </div>
     );
   }

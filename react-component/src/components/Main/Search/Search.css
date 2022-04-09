@@ -8,6 +8,9 @@
 .search {
     display: flex;
     width: 445px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
 .search-input {
@@ -27,6 +30,11 @@
 .search-input::placeholder {
     color: #14dffa;
 }
+.search-label {
+    font-size: 22px;
+    color: rgb(32, 93, 226);
+    font-weight: 700;
+}
 .search-btn {
     width: 40px;
     height: 36px;
@@ -40,4 +48,19 @@
     background-image: url('../../../assets/search.svg');
     background-repeat: no-repeat;
     background-size: contain;
+}
+.reset-btn {
+    width: 60px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+.input-wrapper {
+    display: flex;
+    width: 100%;
 }

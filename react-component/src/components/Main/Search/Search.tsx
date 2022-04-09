@@ -8,20 +8,26 @@ export class Search extends React.Component<ISearchProps> {
   }
 
   render() {
-    const { handleChange, handleSubmit, searchValue } = this.props;
+    const { handleChange, handleSubmit, reset, searchValue } = this.props;
     return (
       <div className="search-wrapper" data-testid="main-page">
         <form className="search" onSubmit={handleSubmit}>
-          <label htmlFor="search" />
-          Enter character name
-          <input
-            className="search-input"
-            type="text"
-            value={searchValue}
-            onChange={handleChange}
-            name="search"
-          ></input>
-          <button className="search-btn" type="submit"></button>
+          <label className="search-label" htmlFor="search">
+            Enter character name
+          </label>
+          <div className="input-wrapper">
+            <input
+              className="search-input"
+              type="text"
+              value={searchValue}
+              onChange={handleChange}
+              name="search"
+            ></input>
+            <button className="search-btn" type="submit"></button>
+            <button className="reset-btn" onClick={reset}>
+              reset
+            </button>
+          </div>
         </form>
       </div>
     );
