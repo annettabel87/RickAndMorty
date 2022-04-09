@@ -1,6 +1,11 @@
 .mainPage {
     padding: 30px 15px;
+    text-align: center;
 }
 .mainPage-title {
     text-align: center;
+}
+.mainPage-error {
+    color: red;
+    font-size: 30px;
 }

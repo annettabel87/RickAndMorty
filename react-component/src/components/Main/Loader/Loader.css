@@ -1,0 +1,23 @@
+.loader-box {
+    width: 300px;
+    height: 30px;
+    border: 0.05em #00B4CC solid;
+    border-radius: 0.1em;
+    background: linear-gradient(-60deg, transparent 0%, transparent 50%, #00B4CC 50%, #00B4CC 75%, transparent 75%, transparent);
+    background-size: 65px 65px;
+    background-position: 0 0;
+    animation: loader 0.8s infinite linear;
+}
+
+
+@keyframes loader {
+	from { background-position: 0 0; }
+	to { background-position: -100px 0; }
+}
+.loader {
+    height: 50vh;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
