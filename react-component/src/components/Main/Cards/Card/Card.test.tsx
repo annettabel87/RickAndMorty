@@ -24,7 +24,7 @@ const data: IRickAndMortyData = {
 };
 
 test('Card renders', () => {
-  render(<Card {...data} />);
+  render(<Card data={data} open={jest.fn()} />);
   expect(screen.getByText(/details/i)).toBeInTheDocument();
   expect(screen.getByText(/age/i)).toBeInTheDocument();
 });

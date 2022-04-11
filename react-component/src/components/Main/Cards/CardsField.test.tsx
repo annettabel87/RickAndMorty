@@ -46,7 +46,7 @@ const data = [
 
 test('Card renders', () => {
   data.map((item) => {
-    render(<Card {...item} />);
+    render(<Card data={item} open={jest.fn()} />);
   });
   const cardElement = screen.getAllByTestId('card');
   expect(cardElement).toHaveLength(data.length);
