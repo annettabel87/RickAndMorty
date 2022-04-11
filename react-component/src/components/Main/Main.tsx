@@ -57,9 +57,12 @@ export class Main extends React.Component<EmptyProps, SearchState> {
     }
     try {
       const response = await fetch(apiConstants.characterUrl);
+      if (!response.ok) {
+        throw Error('could not fetch the data');
+      }
       const data = await response.json();
       this.setState({ data: data.results });
-    } catch (err) {
+    } catch (err: unknown) {
       console.log(err);
     }
   }

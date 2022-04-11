@@ -23,7 +23,7 @@ export class FullCard extends React.Component<IFullCardProps> {
             e.stopPropagation();
           }}
         >
-          <button className="close" onClick={this.props.onClose} />
+          <button className="close" onClick={this.props.onClose} data-testid="close-btn" />
           <div className="main-fullcard--img-wrapper">
             <img className="main-fullcard-img" src={image} alt="image" />
           </div>

@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { IRickAndMortyData } from '../../Main';
-import { Card } from './Card';
+import { FullCard } from './FullCard';
 
 const data: IRickAndMortyData = {
   id: 2,
@@ -24,7 +25,8 @@ const data: IRickAndMortyData = {
 };
 
 test('Card renders', () => {
-  render(<Card data={data} open={jest.fn()} />);
+  render(<FullCard data={data} onClose={jest.fn()} />);
   expect(screen.getByText(/name/i)).toBeInTheDocument();
-  expect(screen.getByTestId('card-btn')).toBeInTheDocument();
+  expect(screen.getByText(/Gender/i)).toBeInTheDocument();
+  expect(screen.getByTestId('close-btn')).toBeInTheDocument();
 });
