@@ -45,26 +45,26 @@ const mockForSearch = {
 describe('searchBar', () => {
   test('renders search component', () => {
     render(<Search {...mockForSearch} />);
-    const input = screen.getByRole('textbox');
+    const input = screen.getByTestId('search');
     expect(input).toBeInTheDocument();
   });
 
   test('render input if localStorage empty', () => {
     render(<Search {...mockForSearch} />);
-    expect(screen.getByDisplayValue('')).toBeInTheDocument();
+    expect(screen.getByTestId('search')).toBeInTheDocument();
   });
 
   test('render value from localStorage if it contain them', () => {
     localStorage = new LocalStorageMock();
     const { rerender } = render(<Search {...mockForSearch} />);
-    userEvent.type(screen.getByDisplayValue(''), 'react');
+    userEvent.type(screen.getByTestId('search'), 'rick');
     rerender(<Search {...mockForSearch} />);
-    expect(screen.getByDisplayValue('react')).toBeInTheDocument;
+    expect(screen.getByTestId('search')).toContainHTML('rick');
   });
   test('onchange works', () => {
     render(<Search {...mockForSearch} />);
-    const input = screen.getByRole('textbox');
-    userEvent.type(input, 'React');
-    expect(screen.getByRole('textbox')).toContainHTML('React');
+    const input = screen.getByTestId('search');
+    userEvent.type(input, 'rick');
+    expect(screen.getByTestId('search')).toContainHTML('rick');
   });
 });

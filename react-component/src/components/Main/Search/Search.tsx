@@ -22,8 +22,9 @@ export class Search extends React.Component<ISearchProps> {
               value={searchValue}
               onChange={handleChange}
               name="search"
+              data-testid="search"
             ></input>
-            <button className="search-btn" type="submit"></button>
+            <button className="search-btn" type="submit" data-testid="searchBtn"></button>
             <button className="reset-btn" onClick={reset}>
               reset
             </button>
