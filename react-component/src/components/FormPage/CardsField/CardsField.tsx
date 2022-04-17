@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { IFormCard } from '../Form/Form';
 import { FormCard } from './Card/FormCard';
 import './CardsField.css';
 
-export class CardsField extends React.Component<IFormCard[]> {
-  constructor(props: IFormCard[]) {
-    super(props);
-  }
-
-  render() {
-    const cardData = Array.from(Object.values(this.props));
-    const elements = cardData.map((data: IFormCard) => <FormCard key={data.id} {...data} />);
-    return (
-      <div className="cardsField" data-testid="cardField">
-        {elements}
-      </div>
-    );
-  }
-}
+export const CardsField: FC<IFormCard[]> = (data: IFormCard[]) => {
+  const cardData = Array.from(Object.values(data));
+  const elements = cardData.map((itemData: IFormCard) => (
+    <FormCard key={itemData.id} {...itemData} />
+  ));
+  return (
+    <div className="cardsField" data-testid="cardField">
+      {elements}
+    </div>
+  );
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import { Form, IFormCard } from './Form/Form';
 import { CardsField } from './CardsField/CardsField';
 import './FormPage.css';
@@ -11,25 +11,18 @@ export interface IAddCardData {
 export type State = {
   cardData: IFormCard[];
 };
-export class FormPage extends React.Component<EmptyProps, State> {
-  constructor(props: EmptyProps) {
-    super(props);
-    this.state = {
-      cardData: [],
-    };
-    this.onAddCardData = this.onAddCardData.bind(this);
-  }
 
-  onAddCardData(data: IFormCard) {
-    this.setState({ cardData: [...this.state.cardData, data] });
-  }
+export const FormPage: FC = () => {
+  const [cardData, setCardData] = useState<IFormCard[]>([]);
 
-  render() {
-    return (
-      <div className="form-container" data-testid="form-page">
-        <Form addCardData={this.onAddCardData} />
-        <CardsField {...this.state.cardData} />
-      </div>
-    );
-  }
-}
+  const onAddCardData = (data: IFormCard) => {
+    setCardData([...cardData, data]);
+  };
+
+  return (
+    <div className="form-container" data-testid="form-page">
+      <Form addCardData={onAddCardData} />
+      <CardsField {...cardData} />
+    </div>
+  );
+};
