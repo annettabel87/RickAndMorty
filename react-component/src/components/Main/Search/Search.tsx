@@ -1,36 +1,27 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ISearchProps } from '../Main';
 import './Search.css';
 
-export class Search extends React.Component<ISearchProps> {
-  constructor(props: ISearchProps) {
-    super(props);
-  }
-
-  render() {
-    const { handleChange, handleSubmit, reset, searchValue } = this.props;
-    return (
-      <div className="search-wrapper" data-testid="main-page">
-        <form className="search" onSubmit={handleSubmit}>
-          <label className="search-label" htmlFor="search">
-            Enter character name
-          </label>
-          <div className="input-wrapper">
-            <input
-              className="search-input"
-              type="text"
-              value={searchValue}
-              onChange={handleChange}
-              name="search"
-              data-testid="search"
-            ></input>
-            <button className="search-btn" type="submit" data-testid="searchBtn"></button>
-            <button className="reset-btn" onClick={reset}>
-              reset
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+export const Search: FC<ISearchProps> = (props: ISearchProps) => {
+  const { onSubmit, searchValue, handleChange } = props;
+  return (
+    <div className="search-wrapper" data-testid="main-page">
+      <form className="search" onSubmit={onSubmit}>
+        <label className="search-label" htmlFor="search">
+          Enter character name
+        </label>
+        <div className="input-wrapper">
+          <input
+            className="search-input"
+            type="text"
+            value={searchValue}
+            onChange={handleChange}
+            name="search"
+            data-testid="search"
+          ></input>
+          <button className="search-btn" type="submit" data-testid="searchBtn"></button>
+        </div>
+      </form>
+    </div>
+  );
+};

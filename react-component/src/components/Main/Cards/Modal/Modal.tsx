@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import './Modal.css';
 
@@ -7,25 +7,19 @@ interface IModalProps {
   open: boolean;
   onClose: () => void;
 }
-export class Modal extends React.Component<IModalProps> {
-  domNode: HTMLElement | null;
-  element: HTMLDivElement;
-  constructor(props: IModalProps) {
-    super(props);
-    this.domNode = document.getElementById('portal');
-    this.element = document.createElement('div');
+export const Modal: FC<IModalProps> = (props: IModalProps) => {
+  const domNode = document.getElementById('portal');
+  const element = document.createElement('div');
+  useEffect(() => {
+    domNode?.appendChild(element);
+    return () => {
+      domNode?.removeChild(element);
+    };
+  });
+
+  if (props.open) {
+    return ReactDom.createPortal(props.children, element);
+  } else {
+    return null;
   }
-  componentDidMount() {
-    this.domNode?.appendChild(this.element);
-  }
-  componentWillUnmount() {
-    this.domNode?.removeChild(this.element);
-  }
-  render() {
-    if (this.props.open) {
-      return ReactDom.createPortal(this.props.children, this.element);
-    } else {
-      return null;
-    }
-  }
-}
+};

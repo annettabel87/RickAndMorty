@@ -37,10 +37,10 @@ class LocalStorageMock {
   }
 }
 const mockForSearch = {
-  handleChange: jest.fn(),
-  handleSubmit: jest.fn(),
-  reset: jest.fn(),
   searchValue: 'rick',
+  onSubmit: jest.fn(),
+  reset: jest.fn(),
+  handleChange: jest.fn(),
 };
 describe('searchBar', () => {
   test('renders search component', () => {

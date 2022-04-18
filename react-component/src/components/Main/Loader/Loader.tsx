@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Loader.css';
 
-export class Loader extends React.Component {
-  render() {
-    return <div className="loader-box" data-testid="loader"></div>;
-  }
-}
+export const Loader: FC = () => {
+  return <div className="loader-box" data-testid="loader"></div>;
+};

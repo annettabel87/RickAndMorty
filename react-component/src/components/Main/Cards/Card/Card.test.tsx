@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { IRickAndMortyData } from '../../Main';
+import { IRickAndMortyData } from '../CardsField';
 import { Card } from './Card';
 
 const data: IRickAndMortyData = {
