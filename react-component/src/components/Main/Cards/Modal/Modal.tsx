@@ -17,9 +17,5 @@ export const Modal: FC<IModalProps> = (props: IModalProps) => {
     };
   });
 
-  if (props.open) {
-    return ReactDom.createPortal(props.children, element);
-  } else {
-    return null;
-  }
+  return props.open ? ReactDom.createPortal(props.children, element) : null;
 };
