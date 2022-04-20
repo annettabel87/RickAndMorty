@@ -5,7 +5,7 @@ import './Search.css';
 export const Search: FC<ISearchProps> = (props: ISearchProps) => {
   const { onSubmit, searchValue, handleChange } = props;
   return (
-    <div className="search-wrapper" data-testid="main-page">
+    <div className="search-wrapper" data-testid="search">
       <form className="search" onSubmit={onSubmit}>
         <label className="search-label" htmlFor="search">
           Enter character name
@@ -17,7 +17,7 @@ export const Search: FC<ISearchProps> = (props: ISearchProps) => {
             value={searchValue}
             onChange={handleChange}
             name="search"
-            data-testid="search"
+            data-testid="search-input"
           ></input>
           <button className="search-btn" type="submit" data-testid="searchBtn"></button>
         </div>

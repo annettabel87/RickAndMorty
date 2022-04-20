@@ -52,7 +52,7 @@ export const CardsField: FC<CardFieldProps> = (data: CardFieldProps) => {
   ));
   const id = data.searchData.map((item) => item.id).findIndex((id) => id === selectedValue);
   return (
-    <div>
+    <div data-testid="cardsField">
       <div className="cardsPage" onClick={onOpen}>
         {elements}
       </div>

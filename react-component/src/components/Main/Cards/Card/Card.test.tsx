@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { IRickAndMortyData } from '../CardsField';
 import { Card } from './Card';
 
@@ -23,8 +24,18 @@ const data: IRickAndMortyData = {
   created: '',
 };
 
-test('Card renders', () => {
-  render(<Card data={data} open={jest.fn()} />);
-  expect(screen.getByText(/name/i)).toBeInTheDocument();
-  expect(screen.getByTestId('card-btn')).toBeInTheDocument();
+describe('cards test', () => {
+  beforeEach(() => {
+    render(<Card data={data} open={jest.fn()} />);
+  });
+  test('Card renders', () => {
+    expect(screen.getByText(/name/i)).toBeInTheDocument();
+    expect(screen.getByTestId('card-btn')).toBeInTheDocument();
+  });
+  test('render fullCard', async () => {
+    userEvent.click(screen.getByTestId('card-btn'));
+    waitFor(() => {
+      expect(screen.getByTestId('fullcard')).toBeInTheDocument();
+    });
+  });
 });

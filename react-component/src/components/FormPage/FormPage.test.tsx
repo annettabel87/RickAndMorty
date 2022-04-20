@@ -1,36 +1,51 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { FormPage } from './FormPage';
 import userEvent from '@testing-library/user-event';
 
+type typeIntoFormProps = {
+  name?: string;
+  surname?: string;
+};
+const typeIntoForm = ({ name, surname }: typeIntoFormProps) => {
+  const inputName = screen.getByTestId('input-name');
+  const inputSurname = screen.getByTestId('input-surname');
+  if (name) {
+    userEvent.type(inputName, name);
+  }
+  if (surname) {
+    userEvent.type(inputSurname, surname);
+  }
+  return {
+    inputName,
+    inputSurname,
+  };
+};
+const addFunction = jest.fn();
 describe('FormPage test', () => {
-  render(<FormPage />);
+  beforeEach(() => {
+    render(<FormPage />);
+  });
   test('renders form component', () => {
-    const form = screen.getByTestId('form');
-    expect(form).toBeInTheDocument();
+    expect(screen.getByTestId('form')).toBeInTheDocument();
   });
   test('renders cardField component', () => {
-    render(<FormPage />);
-    //screen.debug();
-    const cardField = screen.getByTestId('cardField');
-    expect(cardField).toBeInTheDocument();
+    expect(screen.getByTestId('cardField')).toBeInTheDocument();
   });
-  test('add cards after submit form ', async () => {
-    render(<FormPage />);
+  test('add cards after submit form ', () => {
     global.URL.createObjectURL = jest.fn();
-    const inputName = screen.getByTestId('input-name');
-    userEvent.type(inputName, 'Anna');
-    const inputSurname = screen.getByTestId('input-surname');
-    userEvent.type(inputSurname, 'Repeshko');
-    const inputBirth = screen.getByTestId('input-birth');
-    userEvent.type(inputBirth, '2020-05-24');
-    const inputCountry = screen.getByTestId('select-country');
-    const inputGender = screen.getByTestId('input-gender');
-    fireEvent.click(inputGender);
-    const inputAgree = screen.getByTestId('input-agree');
-    fireEvent.click(inputAgree);
-    const inputSubmit = screen.getByTestId('form-btn');
-    fireEvent.click(inputSubmit);
-    expect(screen.getByTestId('formCard')).toBeInTheDocument();
+    typeIntoForm({ name: 'Anna' });
+    typeIntoForm({ surname: 'Repeshko' });
+    userEvent.type(screen.getByTestId('input-birth'), '2020-05-24');
+    fireEvent.change(screen.getByTestId('input-file'), {
+      target: {
+        files: [new File(['img'], 'chucknorris.jpg', { type: 'image/png' })],
+      },
+    });
+    userEvent.click(screen.getByTestId('input-agree'));
+    userEvent.click(screen.getByTestId('form-btn'));
+    waitFor(() => {
+      expect(screen.getByTestId('formCard')).toBeInTheDocument;
+    });
   });
 });
