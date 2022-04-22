@@ -33,11 +33,10 @@ export class CardsField extends React.Component<IRickAndMortyData[], ICardFielad
     }
   }
   render() {
-    const cardData = Array.from(Object.values(this.props));
-    const elements = cardData.map((data: IRickAndMortyData) => (
+    const elements = Array.from(Object.values(this.props)).map((data: IRickAndMortyData) => (
       <Card key={data.id} data={data} open={this.onOpen} />
     ));
-    const id = cardData.map((item) => item.id).findIndex((id) => id == this.state.idCard);
+    const id = Array.from(Object.values(this.props)).map((item) => item.id).findIndex((id) => id === this.state.idCard);
     return (
       <div>
         <div className="cardsPage" onClick={this.onOpen}>
@@ -45,7 +44,7 @@ export class CardsField extends React.Component<IRickAndMortyData[], ICardFielad
         </div>
 
         <Modal onClose={this.onClosed} open={this.state.isOpen}>
-          <FullCard data={cardData[id]} onClose={this.onClosed} />
+          <FullCard data={Array.from(Object.values(this.props))[id]} onClose={this.onClosed} />
         </Modal>
       </div>
     );
