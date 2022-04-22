@@ -63,7 +63,7 @@ export class Main extends React.Component<EmptyProps, SearchState> {
       const data = await response.json();
       this.setState({ data: data.results });
     } catch (err: unknown) {
-      console.log(err);
+      console.error(err);
     }
   }
   componentWillUnmount() {
