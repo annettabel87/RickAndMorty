@@ -22,10 +22,7 @@ export class Modal extends React.Component<IModalProps> {
     this.domNode?.removeChild(this.element);
   }
   render() {
-    if (this.props.open) {
-      return ReactDom.createPortal(this.props.children, this.element);
-    } else {
-      return null;
-    }
+    return this.props.open ? 
+       ReactDom.createPortal(this.props.children, this.element) : null    
   }
 }
