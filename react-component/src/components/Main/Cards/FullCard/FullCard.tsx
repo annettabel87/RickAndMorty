@@ -6,9 +6,8 @@ interface IFullCardProps {
   data: IRickAndMortyData;
   onClose: () => void;
 }
-export const FullCard: FC<IFullCardProps> = (data: IFullCardProps) => {
-  const { id, name, status, image, species, gender, created } = data.data;
-  const onClose = data.onClose;
+export const FullCard: FC<IFullCardProps> = ({ data, onClose }: IFullCardProps) => {
+  const { id, name, status, image, species, gender, created } = data;
 
   return (
     <div className="overlay" onClick={onClose}>

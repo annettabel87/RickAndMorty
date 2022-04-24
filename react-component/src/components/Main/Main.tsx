@@ -1,30 +1,40 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Search } from './Search/Search';
-import { CardsField, IRickAndMortyData } from './Cards/CardsField';
+import { CardsField } from './Cards/CardsField';
 import { apiConstants } from '../../constants';
 import { Loader } from './Loader/Loader';
+import { useGlobalMainContext } from '../state/context';
+import { MainStateKind } from '../state/reducer';
 import './Main.css';
 
 export interface ISearchProps {
   searchValue: string;
-  onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: React.ChangeEvent<HTMLFormElement>, value: string) => void;
+}
+interface SearchParameters {
+  page: number;
+  name?: string;
+  status?: string;
+  species?: string;
 }
 export const Main: FC = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [searchData, setSearchData] = useState<IRickAndMortyData[]>([]);
   const [error, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [page, setPage] = useState(1);
+  const [status, setStatus] = useState('');
+  const [species, setSpecies] = useState('');
+  const { state, searchValue, dispatch } = useGlobalMainContext();
 
-  const fetchData = async () => {
+  const fetchData = async ({ page = 1, name, status, species }: SearchParameters) => {
+    const query = `page=${page}&name=${name}&status=${status}&species=${species}`;
     setError(false);
     try {
-      const response = await fetch(apiConstants.characterUrl);
+      const response = await fetch(`${apiConstants.characterUrl}?${query}`);
       const data = await response.json();
       if (!response.ok) {
         throw Error('not found');
       }
-      setSearchData(data.results);
+      dispatch({ type: MainStateKind.ADD, payload: data.results });
     } catch (err) {
       setError(true);
     } finally {
@@ -32,50 +42,32 @@ export const Main: FC = () => {
     }
   };
 
-  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>, value: string) => {
     setError(false);
     e.preventDefault();
     setIsLoaded(true);
-    try {
-      const response = await fetch(`${apiConstants.characterUrl}/?name=${searchValue}`);
-      const data = await response.json();
-      if (!response.ok) {
-        throw Error('not found');
-      }
-      setSearchData(data.results);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setIsLoaded(false);
-      setSearchValue('');
-    }
-  };
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSearchValue(event.target.value.toLowerCase());
+    dispatch({ type: MainStateKind.SEARCH, payload: value });
   };
   const reset = () => {
-    setSearchValue('');
-    fetchData();
-    localStorage.clear();
+    setPage(1);
+    dispatch({ type: MainStateKind.SEARCH, payload: '' });
+    setStatus('');
+    setSpecies('');
   };
   useEffect(() => {
-    const oldSearchValue = localStorage.getItem('inputValue');
-    if (oldSearchValue) {
-      setSearchValue(oldSearchValue);
-    }
-    return () => {
-      localStorage.setItem('inputValue', searchValue);
-    };
+    fetchData({
+      page,
+      name: searchValue,
+      status,
+      species,
+    });
   }, [searchValue]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <div className="mainPage" data-testid="main-page">
       <h2 className="mainPage-title">Rick and Morty</h2>
       <div className="search-block">
-        <Search searchValue={searchValue} onSubmit={onSubmit} handleChange={handleChange} />
+        <Search searchValue={searchValue} onSubmit={onSubmit} />
         <button className="reset-btn" onClick={reset}>
           reset
         </button>
@@ -86,7 +78,7 @@ export const Main: FC = () => {
           <Loader />
         </div>
       ) : (
-        <CardsField searchData={searchData} reset={reset} />
+        <CardsField searchData={state} />
       )}
     </div>
   );

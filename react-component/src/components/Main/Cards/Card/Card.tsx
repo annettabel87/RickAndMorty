@@ -6,9 +6,8 @@ interface ICardProp {
   data: IRickAndMortyData;
   open: (e: React.SyntheticEvent<EventTarget>) => void;
 }
-export const Card: FC<ICardProp> = (data: ICardProp) => {
-  const { id, image, name, status } = data.data;
-  const open = data.open;
+export const Card: FC<ICardProp> = ({ data, open }: ICardProp) => {
+  const { id, image, name, status } = data;
   return (
     <div className="main-card" data-testid="card" data-id={id}>
       <div className="main-card--img-wrapper">

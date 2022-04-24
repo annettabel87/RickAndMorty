@@ -5,9 +5,8 @@ import './Modal.css';
 interface IModalProps {
   children: React.ReactNode;
   open: boolean;
-  onClose: () => void;
 }
-export const Modal: FC<IModalProps> = (props: IModalProps) => {
+export const Modal: FC<IModalProps> = ({ children, open }: IModalProps) => {
   const domNode = document.getElementById('portal');
   const element = document.createElement('div');
   useEffect(() => {
@@ -17,5 +16,5 @@ export const Modal: FC<IModalProps> = (props: IModalProps) => {
     };
   });
 
-  return props.open ? ReactDom.createPortal(props.children, element) : null;
+  return open ? ReactDom.createPortal(children, element) : null;
 };

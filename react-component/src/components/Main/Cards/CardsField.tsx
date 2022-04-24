@@ -26,10 +26,9 @@ export interface IRickAndMortyData {
 }
 type CardFieldProps = {
   searchData: IRickAndMortyData[];
-  reset: () => void;
 };
 
-export const CardsField: FC<CardFieldProps> = (data: CardFieldProps) => {
+export const CardsField: FC<CardFieldProps> = ({ searchData }: CardFieldProps) => {
   const [selectedValue, setSelectedValue] = useState(-1);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,18 +46,18 @@ export const CardsField: FC<CardFieldProps> = (data: CardFieldProps) => {
     }
   };
 
-  const elements = data.searchData.map((data: IRickAndMortyData) => (
+  const elements = searchData.map((data: IRickAndMortyData) => (
     <Card key={data.id} data={data} open={onOpen} />
   ));
-  const id = data.searchData.map((item) => item.id).findIndex((id) => id === selectedValue);
+  const id = searchData.map((item) => item.id).findIndex((id) => id === selectedValue);
   return (
     <div data-testid="cardsField">
       <div className="cardsPage" onClick={onOpen}>
         {elements}
       </div>
 
-      <Modal onClose={onClosed} open={isOpen}>
-        <FullCard data={data.searchData[id]} onClose={onClosed} />
+      <Modal open={isOpen}>
+        <FullCard data={searchData[id]} onClose={onClosed} />
       </Modal>
     </div>
   );
