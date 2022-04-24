@@ -2,11 +2,18 @@ import React, { FC } from 'react';
 import { IFormCard } from '../../Form/Form';
 import './FormCard.css';
 
-export const FormCard: FC<IFormCard> = (data: IFormCard) => {
-  const reader = new FileReader();
+export const FormCard: FC<IFormCard> = ({
+  name,
+  surname,
+  birth,
+  country,
+  gender,
+  photo,
+}: IFormCard) => {
   let url;
-  if (data.photo) {
-    url = URL.createObjectURL(new Blob([data.photo[0]]));
+  if (photo) {
+    const photoFile = new Blob([photo[0]]);
+    url = URL.createObjectURL(photoFile);
   }
   return (
     <div className="card" data-testid="formCard">
@@ -15,11 +22,11 @@ export const FormCard: FC<IFormCard> = (data: IFormCard) => {
       </div>
       <div className="card--description-wrapper">
         <div className="card--description-item">
-          {data.name} {data.surname}
+          {name} {surname}
         </div>
-        <div className="card--description-item">Birth: {data.birth}</div>
-        <div className="card--description-item">Country: {data.country}</div>
-        <div className="card--description-item">Gender: {data.gender ? 'Female' : 'Male'}</div>
+        <div className="card--description-item">Birth: {birth}</div>
+        <div className="card--description-item">Country: {country}</div>
+        <div className="card--description-item">Gender: {gender ? 'Female' : 'Male'}</div>
       </div>
     </div>
   );

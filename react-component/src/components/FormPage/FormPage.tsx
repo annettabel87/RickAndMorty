@@ -1,6 +1,8 @@
-import React, { FC, useState } from 'react';
+import { FC } from 'react';
 import { Form, IFormCard } from './Form/Form';
 import { CardsField } from './CardsField/CardsField';
+import { useGlobalFormContext } from '../state/formContext';
+import { ADD_CARD } from '../state/formReducer';
 import './FormPage.css';
 
 export type EmptyProps = Record<string, never>;
@@ -13,16 +15,16 @@ export type State = {
 };
 
 export const FormPage: FC = () => {
-  const [cardData, setCardData] = useState<IFormCard[]>([]);
+  const { formstate, formDispatch } = useGlobalFormContext();
 
   const onAddCardData = (data: IFormCard) => {
-    setCardData([...cardData, data]);
+    formDispatch({ type: ADD_CARD, payload: data });
   };
 
   return (
     <div className="form-container" data-testid="form-page">
       <Form addCardData={onAddCardData} />
-      <CardsField {...cardData} />
+      <CardsField {...formstate} />
     </div>
   );
 };
