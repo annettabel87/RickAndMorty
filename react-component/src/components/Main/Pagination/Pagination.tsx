@@ -53,7 +53,7 @@ export const Pagination: FC<paginationPropsType> = ({
   };
   return (
     <div className="pagination">
-      <span>
+      <span className="pagination-numbering">
         {showPage}/{showPages}
       </span>
       <div className="select-wrapper">
@@ -68,26 +68,26 @@ export const Pagination: FC<paginationPropsType> = ({
           <option value="40">40</option>
           <option value="60">60</option>
         </select>
-      </div>
-      <div className="button-wrapper">
-        <button
-          className="pagination-btn"
-          disabled={prevBtnDisabled}
-          onClick={(e) => {
-            prevPage(e, page);
-          }}
-        >
-          prev
-        </button>
-        <button
-          className="pagination-btn"
-          disabled={nextBtnDisabled}
-          onClick={(e) => {
-            nextPage(e, page);
-          }}
-        >
-          next
-        </button>
+        <div className="button-wrapper">
+          <button
+            className="pagination-btn"
+            disabled={prevBtnDisabled}
+            onClick={(e) => {
+              prevPage(e, page);
+            }}
+          >
+            prev
+          </button>
+          <button
+            className="pagination-btn"
+            disabled={nextBtnDisabled}
+            onClick={(e) => {
+              nextPage(e, page);
+            }}
+          >
+            next
+          </button>
+        </div>
       </div>
     </div>
   );
