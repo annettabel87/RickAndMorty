@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+.cards-count {
+    border: 3px solid #00B4CC;    
+    padding: 5px;
+    height: 40px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: black;
+    font-size: 21px;
+}
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.pagination-btn {
+    width: 60px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}

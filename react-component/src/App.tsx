@@ -18,7 +18,13 @@ function App() {
   const [formstate, formDispatch] = useReducer(formReducer, formState);
   return (
     <GlobalMainContext.Provider
-      value={{ state: state.data, searchValue: state.searchValue, dispatch }}
+      value={{
+        state: state.data,
+        searchValue: state.searchValue,
+        cardsCount: state.cardsCount,
+        page: state.page,
+        dispatch,
+      }}
     >
       <GlobalFormContext.Provider value={{ formstate: formstate.data, formDispatch }}>
         <div className="App">
