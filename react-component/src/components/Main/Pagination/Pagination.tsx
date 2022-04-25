@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { MainStateAction, MainStateKind } from '../../state/reducer';
 import './Pagination.css';
 
@@ -9,6 +9,7 @@ export type paginationPropsType = {
   onSelect: (value: string) => void;
   dispatch: React.Dispatch<MainStateAction>;
 };
+
 export const Pagination: FC<paginationPropsType> = ({
   cardsCount,
   page,
@@ -33,24 +34,42 @@ export const Pagination: FC<paginationPropsType> = ({
         : Math.ceil(+pages / 3);
     setshowPages(showpages);
   }, [page, pages, cardsCount]);
+
   useEffect(() => {
     page === 1 ? setPrevBtnDisabled(true) : setPrevBtnDisabled(false);
     page === +pages ? setNextBtnDisabled(true) : setNextBtnDisabled(false);
   }, [page, pages]);
-  const prevPage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, pageNumber: number) => {
-    const payload =
-      cardsCount === '20' ? pageNumber - 1 : cardsCount === '40' ? pageNumber - 2 : pageNumber - 3;
-    pageNumber >= 2
-      ? dispatch({ type: MainStateKind.SET_PAGE, payload: payload })
-      : dispatch({ type: MainStateKind.SET_PAGE, payload: 1 });
-  };
-  const nextPage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, pageNumber: number) => {
-    const payload =
-      cardsCount === '20' ? pageNumber + 1 : cardsCount === '40' ? pageNumber + 2 : pageNumber + 3;
-    pageNumber < +pages
-      ? dispatch({ type: MainStateKind.SET_PAGE, payload: payload })
-      : dispatch({ type: MainStateKind.SET_PAGE, payload: pages });
-  };
+
+  const prevPage = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, pageNumber: number) => {
+      const payload =
+        cardsCount === '20'
+          ? pageNumber - 1
+          : cardsCount === '40'
+          ? pageNumber - 2
+          : pageNumber - 3;
+      pageNumber >= 2
+        ? dispatch({ type: MainStateKind.SET_PAGE, payload: payload })
+        : dispatch({ type: MainStateKind.SET_PAGE, payload: 1 });
+    },
+    [cardsCount, dispatch]
+  );
+
+  const nextPage = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, pageNumber: number) => {
+      const payload =
+        cardsCount === '20'
+          ? pageNumber + 1
+          : cardsCount === '40'
+          ? pageNumber + 2
+          : pageNumber + 3;
+      pageNumber < +pages
+        ? dispatch({ type: MainStateKind.SET_PAGE, payload: payload })
+        : dispatch({ type: MainStateKind.SET_PAGE, payload: pages });
+    },
+    [cardsCount, dispatch, pages]
+  );
+
   return (
     <div className="pagination">
       <span className="pagination-numbering">

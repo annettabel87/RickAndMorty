@@ -4,6 +4,7 @@ export const routers = {
   ROUTE_CARDS: '/cards',
   ROUTE_FORM: '/form',
   ROUTE_NOTFOUND: '*',
+  ROUTE_FULLCARD: '/character',
 };
 
 export const validateConstants = {

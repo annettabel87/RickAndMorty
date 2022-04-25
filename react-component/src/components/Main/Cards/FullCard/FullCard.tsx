@@ -1,25 +1,21 @@
 import React, { FC } from 'react';
-import { IRickAndMortyData } from '../CardsField';
+import { useNavigate } from 'react-router-dom';
+import { useGlobalMainContext } from '../../../state/context';
 import './FullCard.css';
 
-interface IFullCardProps {
-  data: IRickAndMortyData;
-  onClose: () => void;
-}
-export const FullCard: FC<IFullCardProps> = ({ data, onClose }: IFullCardProps) => {
-  const { id, name, status, image, species, gender, created } = data;
-
+export const FullCard: FC = () => {
+  const { selectCard } = useGlobalMainContext();
+  const { name, status, image, species, gender, created } = selectCard;
+  const navigate = useNavigate();
+  const onBack = () => {
+    navigate(-1);
+  };
   return (
-    <div className="overlay" onClick={onClose}>
-      <div
-        className="main-fullcard"
-        data-testid="fullcard"
-        data-id={id}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <button className="close" onClick={onClose} data-testid="close-btn" />
+    <>
+      <button className="card-btn" data-testid="back-btn" onClick={onBack}>
+        back
+      </button>
+      <div className="main-fullcard" data-testid="fullcard">
         <div className="main-fullcard--img-wrapper">
           <img className="main-fullcard-img" src={image} alt="image" />
         </div>
@@ -31,6 +27,6 @@ export const FullCard: FC<IFullCardProps> = ({ data, onClose }: IFullCardProps) 
           <div className="main-fullcard--description-item">Created: {created}</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

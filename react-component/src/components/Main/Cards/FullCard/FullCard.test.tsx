@@ -25,7 +25,7 @@ const data: IRickAndMortyData = {
 };
 
 test('Card renders', () => {
-  render(<FullCard data={data} onClose={jest.fn()} />);
+  render(<FullCard />);
   expect(screen.getByText(/name/i)).toBeInTheDocument();
   expect(screen.getByText(/Gender/i)).toBeInTheDocument();
   expect(screen.getByTestId('close-btn')).toBeInTheDocument();

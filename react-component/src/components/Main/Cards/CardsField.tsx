@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Card } from './Card/Card';
-import { FullCard } from './FullCard/FullCard';
-import { Modal } from './Modal/Modal';
+import { useGlobalMainContext } from '../../state/context';
+import { MainStateKind } from '../../state/reducer';
 import './CardsField.css';
 
 export interface IRickAndMortyData {
@@ -30,11 +30,7 @@ type CardFieldProps = {
 
 export const CardsField: FC<CardFieldProps> = ({ searchData }: CardFieldProps) => {
   const [selectedValue, setSelectedValue] = useState(-1);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onClosed = () => {
-    setIsOpen(false);
-  };
+  const { dispatch } = useGlobalMainContext();
   const onOpen = (e: React.SyntheticEvent<EventTarget>) => {
     if (!(e.target instanceof HTMLElement)) {
       return;
@@ -42,23 +38,22 @@ export const CardsField: FC<CardFieldProps> = ({ searchData }: CardFieldProps) =
     const { id } = e.target.dataset;
     if (id) {
       setSelectedValue(Number(id));
-      setIsOpen(true);
     }
   };
+  useEffect(() => {
+    const idSelectElement = searchData
+      .map((item) => item.id)
+      .findIndex((id) => id === selectedValue);
+    dispatch({ type: MainStateKind.SELECT_CARD, payload: searchData[idSelectElement] });
+  }, [dispatch, searchData, selectedValue]);
 
-  const elements = searchData.map((data: IRickAndMortyData) => (
-    <Card key={data.id} data={data} open={onOpen} />
-  ));
-  const id = searchData.map((item) => item.id).findIndex((id) => id === selectedValue);
+  const elements = searchData.map((data: IRickAndMortyData) => <Card key={data.id} {...data} />);
+
   return (
     <div data-testid="cardsField">
-      <div className="cardsPage" onClick={onOpen}>
+      <div className="cardsPage" onClickCapture={onOpen}>
         {elements}
       </div>
-
-      <Modal open={isOpen}>
-        <FullCard data={searchData[id]} onClose={onClosed} />
-      </Modal>
     </div>
   );
 };

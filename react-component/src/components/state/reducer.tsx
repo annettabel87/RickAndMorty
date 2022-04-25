@@ -6,12 +6,33 @@ type mainStateType = {
   searchValue: string;
   cardsCount: string;
   page: number;
+  selectCard: IRickAndMortyData;
 };
 export const mainState: mainStateType = {
   data: [],
   searchValue: '',
   cardsCount: '20',
   page: 1,
+  selectCard: {
+    id: 0,
+    name: '',
+    status: '',
+    species: '',
+    type: '',
+    gender: '',
+    origin: {
+      name: '',
+      url: '',
+    },
+    location: {
+      name: '',
+      url: '',
+    },
+    image: '',
+    episode: [],
+    url: '',
+    created: '',
+  },
 };
 export enum MainStateKind {
   ADD = 'Add_search_data',
@@ -20,11 +41,12 @@ export enum MainStateKind {
   SELECT_COUNT_CARDS = 'Select_count_cards',
   SET_PAGE = 'Next_page',
   SORT = 'Sort',
+  SELECT_CARD = 'Select_card',
 }
 
 export interface MainStateAction {
   type: MainStateKind;
-  payload: IRickAndMortyData[] | string | number;
+  payload: IRickAndMortyData[] | string | number | IRickAndMortyData;
 }
 
 const sort = (array: IRickAndMortyData[], value: string) => {
@@ -53,6 +75,10 @@ export const mainReducer = (state: mainStateType, action: MainStateAction) => {
       return typeof payload === 'string' ? { ...state, cardsCount: payload } : state;
     case MainStateKind.SET_PAGE:
       return typeof payload === 'number' ? { ...state, page: payload } : state;
+    case MainStateKind.SELECT_CARD:
+      return typeof payload === 'object' && !Array.isArray(payload)
+        ? { ...state, selectCard: payload }
+        : state;
     case MainStateKind.SORT:
       return typeof payload === 'string'
         ? {

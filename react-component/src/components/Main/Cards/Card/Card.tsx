@@ -1,13 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routers } from '../../../../constants';
+import { useGlobalMainContext } from '../../../state/context';
 import { IRickAndMortyData } from '../CardsField';
 import './Card.css';
 
-interface ICardProp {
-  data: IRickAndMortyData;
-  open: (e: React.SyntheticEvent<EventTarget>) => void;
-}
-export const Card: FC<ICardProp> = ({ data, open }: ICardProp) => {
+export const Card: FC<IRickAndMortyData> = (data: IRickAndMortyData) => {
   const { id, image, name, status } = data;
+  const { selectCard } = useGlobalMainContext();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!selectCard) {
+      navigate(routers.ROUTE_MAIN);
+    }
+  });
   return (
     <div className="main-card" data-testid="card" data-id={id}>
       <div className="main-card--img-wrapper">
@@ -17,7 +23,13 @@ export const Card: FC<ICardProp> = ({ data, open }: ICardProp) => {
         <div className="main-card--description-item main-card--name">Name: {name}</div>
         <div className="main-card--description-item">Status: {status}</div>
       </div>
-      <button className="main-card--btn" data-testid="card-btn" data-id={id} onClick={open}>
+      <button
+        className="card-btn"
+        data-id={id}
+        onClick={() => {
+          navigate(routers.ROUTE_FULLCARD);
+        }}
+      >
         more
       </button>
     </div>

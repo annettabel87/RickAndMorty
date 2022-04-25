@@ -30,7 +30,7 @@ export const Main: FC = () => {
   const [sortValue, setSortValue] = useState<string>('default');
   const { state, searchValue, cardsCount, page, dispatch } = useGlobalMainContext();
 
-  const fetchData = React.useCallback(
+  const fetchData = useCallback(
     async ({ page = 1, name, status, species, cardsCount }: SearchParameters) => {
       const query = `page=${page}&name=${name}&status=${status}&species=${species}`;
       setError(false);

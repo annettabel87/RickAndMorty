@@ -7,6 +7,7 @@ export type mainContextType = {
   searchValue: string;
   cardsCount: string;
   page: number;
+  selectCard: IRickAndMortyData;
   dispatch: React.Dispatch<MainStateAction>;
 };
 
@@ -15,6 +16,7 @@ const contextState: mainContextType = {
   searchValue: mainState.searchValue,
   cardsCount: mainState.cardsCount,
   page: mainState.page,
+  selectCard: mainState.selectCard,
   dispatch: () => null,
 };
 
