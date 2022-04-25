@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalMainContext } from '../../../state/context';
 import './FullCard.css';
 
-export const FullCard: FC = () => {
+export const FullCard: FC = React.memo(() => {
   const { selectCard } = useGlobalMainContext();
   const { name, status, image, species, gender, created } = selectCard;
   const navigate = useNavigate();
@@ -29,4 +29,4 @@ export const FullCard: FC = () => {
       </div>
     </>
   );
-};
+});

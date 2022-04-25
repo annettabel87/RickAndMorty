@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Form, IFormCard } from './Form/Form';
 import { CardsField } from './CardsField/CardsField';
 import { useGlobalFormContext } from '../state/formContext';
@@ -17,9 +17,12 @@ export type State = {
 export const FormPage: FC = () => {
   const { formstate, formDispatch } = useGlobalFormContext();
 
-  const onAddCardData = (data: IFormCard) => {
-    formDispatch({ type: ADD_CARD, payload: data });
-  };
+  const onAddCardData = useCallback(
+    (data: IFormCard) => {
+      formDispatch({ type: ADD_CARD, payload: data });
+    },
+    [formDispatch]
+  );
 
   return (
     <div className="form-container" data-testid="form-page">

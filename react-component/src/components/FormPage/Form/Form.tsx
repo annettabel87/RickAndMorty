@@ -24,7 +24,7 @@ export type IFormData = {
   agree: boolean;
 };
 
-export const Form: FC<IAddCardData> = ({ addCardData }: IAddCardData) => {
+export const Form: FC<IAddCardData> = React.memo(({ addCardData }: IAddCardData) => {
   const {
     register,
     handleSubmit,
@@ -159,4 +159,4 @@ export const Form: FC<IAddCardData> = ({ addCardData }: IAddCardData) => {
       </button>
     </form>
   );
-};
+});

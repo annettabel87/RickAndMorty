@@ -5,7 +5,7 @@ import { useGlobalMainContext } from '../../../state/context';
 import { IRickAndMortyData } from '../CardsField';
 import './Card.css';
 
-export const Card: FC<IRickAndMortyData> = (data: IRickAndMortyData) => {
+export const Card: FC<IRickAndMortyData> = React.memo((data: IRickAndMortyData) => {
   const { id, image, name, status } = data;
   const { selectCard } = useGlobalMainContext();
   const navigate = useNavigate();
@@ -34,4 +34,4 @@ export const Card: FC<IRickAndMortyData> = (data: IRickAndMortyData) => {
       </button>
     </div>
   );
-};
+});

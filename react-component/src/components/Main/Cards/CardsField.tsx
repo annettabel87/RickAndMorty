@@ -28,7 +28,7 @@ type CardFieldProps = {
   searchData: IRickAndMortyData[];
 };
 
-export const CardsField: FC<CardFieldProps> = ({ searchData }: CardFieldProps) => {
+export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFieldProps) => {
   const [selectedValue, setSelectedValue] = useState(-1);
   const { dispatch } = useGlobalMainContext();
   const onOpen = (e: React.SyntheticEvent<EventTarget>) => {
@@ -56,4 +56,4 @@ export const CardsField: FC<CardFieldProps> = ({ searchData }: CardFieldProps) =
       </div>
     </div>
   );
-};
+});
