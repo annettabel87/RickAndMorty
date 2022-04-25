@@ -57,11 +57,7 @@ export const Pagination: FC<paginationPropsType> = ({
         {showPage}/{showPages}
       </span>
       <div className="select-wrapper">
-        <select
-          className="cards-count"
-          value={cardsCount}
-          onChange={(e) => onSelect(e.target.value)}
-        >
+        <select className="select" value={cardsCount} onChange={(e) => onSelect(e.target.value)}>
           <option value="20" selected>
             20
           </option>

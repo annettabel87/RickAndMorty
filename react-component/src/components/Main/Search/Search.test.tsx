@@ -41,6 +41,8 @@ const mockForSearch = {
   onSubmit: jest.fn(),
   reset: jest.fn(),
   handleChange: jest.fn(),
+  sortValue: '',
+  setSortValue: jest.fn(),
 };
 describe('searchBar', () => {
   test('renders search component', () => {

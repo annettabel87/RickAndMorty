@@ -1,16 +1,18 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Search } from './Search/Search';
 import { CardsField } from './Cards/CardsField';
 import { apiConstants } from '../../constants';
 import { Loader } from './Loader/Loader';
 import { useGlobalMainContext } from '../state/context';
 import { MainStateKind } from '../state/reducer';
-import './Main.css';
 import { Pagination } from './Pagination/Pagination';
+import './Main.css';
 
 export interface ISearchProps {
   searchValue: string;
   onSubmit: (e: React.ChangeEvent<HTMLFormElement>, value: string) => void;
+  sortValue: string;
+  setSortValue: React.Dispatch<React.SetStateAction<string>>;
 }
 interface SearchParameters {
   page: number;
@@ -20,11 +22,12 @@ interface SearchParameters {
   cardsCount: string;
 }
 export const Main: FC = () => {
-  const [error, setError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [status, setStatus] = useState('');
-  const [species, setSpecies] = useState('');
-  const [pages, setPages] = useState('');
+  const [error, setError] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [status, setStatus] = useState<string>('');
+  const [species, setSpecies] = useState<string>('');
+  const [pages, setPages] = useState<string>('');
+  const [sortValue, setSortValue] = useState<string>('default');
   const { state, searchValue, cardsCount, page, dispatch } = useGlobalMainContext();
 
   const fetchData = React.useCallback(
@@ -74,17 +77,24 @@ export const Main: FC = () => {
   const onSelect = async (value: string) => {
     dispatch({ type: MainStateKind.SELECT_COUNT_CARDS, payload: value });
   };
-  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>, value: string) => {
-    setError(false);
-    e.preventDefault();
-    setIsLoaded(true);
-    dispatch({ type: MainStateKind.SEARCH, payload: value });
-  };
+  const onSubmit = useCallback(
+    async (e: React.ChangeEvent<HTMLFormElement>, value: string) => {
+      setError(false);
+      e.preventDefault();
+      setIsLoaded(true);
+      dispatch({ type: MainStateKind.SEARCH, payload: value });
+    },
+    [dispatch]
+  );
+  useEffect(() => {
+    dispatch({ type: MainStateKind.SORT, payload: sortValue });
+  }, [dispatch, sortValue]);
   const reset = () => {
     dispatch({ type: MainStateKind.SET_PAGE, payload: 1 });
     dispatch({ type: MainStateKind.SEARCH, payload: '' });
     setStatus('');
     setSpecies('');
+    setSortValue('');
   };
   useEffect(() => {
     fetchData({
@@ -100,7 +110,12 @@ export const Main: FC = () => {
     <div className="mainPage" data-testid="main-page">
       <h2 className="mainPage-title">Rick and Morty</h2>
       <div className="search-block">
-        <Search searchValue={searchValue} onSubmit={onSubmit} />
+        <Search
+          searchValue={searchValue}
+          onSubmit={onSubmit}
+          sortValue={sortValue}
+          setSortValue={setSortValue}
+        />
         <button className="reset-btn" onClick={reset}>
           reset
         </button>

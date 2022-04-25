@@ -15,3 +15,10 @@ export const apiConstants = {
   locationUrl: 'https://rickandmortyapi.com/api/location',
   episodeUrl: 'https://rickandmortyapi.com/api/episode',
 };
+
+export const valueToSort = {
+  NAME: 'name',
+  NAME_REVERSE: 'name-reverse',
+  GENDER: 'gender',
+  GENDER_REVERSE: 'gender-reverse',
+};
