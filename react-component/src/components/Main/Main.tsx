@@ -89,7 +89,7 @@ export const Main: FC = () => {
           <Loader />
         </div>
       ) : (
-        <CardsField searchData={searchData} reset={reset} />
+        <CardsField searchData={searchData} />
       )}
     </div>
   );
