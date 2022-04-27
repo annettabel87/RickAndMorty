@@ -56,7 +56,7 @@ export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFi
         {elements}
       </div>
 
-      <Modal onClose={onClosed} open={isOpen}>
+      <Modal open={isOpen}>
         <FullCard data={searchData[id]} onClose={onClosed} />
       </Modal>
     </div>
