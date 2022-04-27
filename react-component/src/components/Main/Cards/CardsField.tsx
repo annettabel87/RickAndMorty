@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Card } from './Card/Card';
 import { FullCard } from './FullCard/FullCard';
 import { Modal } from './Modal/Modal';
@@ -32,10 +32,10 @@ export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFi
   const [selectedValue, setSelectedValue] = useState(-1);
   const [isOpen, setIsOpen] = useState(false);
 
-  const onClosed = () => {
+  const onClosed = useCallback(() => {
     setIsOpen(false);
-  };
-  const onOpen = (e: React.SyntheticEvent<EventTarget>) => {
+  }, []);
+  const onOpen = useCallback((e: React.SyntheticEvent<EventTarget>) => {
     if (!(e.target instanceof HTMLElement)) {
       return;
     }
@@ -44,7 +44,7 @@ export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFi
       setSelectedValue(Number(id));
       setIsOpen(true);
     }
-  };
+  }, []);
 
   const elements = searchData.map((data: IRickAndMortyData) => (
     <Card key={data.id} data={data} open={onOpen} />
