@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Form, IFormCard } from './Form/Form';
 import { CardsField } from './CardsField/CardsField';
 import './FormPage.css';
@@ -15,9 +15,12 @@ export type State = {
 export const FormPage: FC = () => {
   const [cardData, setCardData] = useState<IFormCard[]>([]);
 
-  const onAddCardData = (data: IFormCard) => {
-    setCardData([...cardData, data]);
-  };
+  const onAddCardData = useCallback(
+    (data: IFormCard) => {
+      setCardData([...cardData, data]);
+    },
+    [cardData]
+  );
 
   return (
     <div className="form-container" data-testid="form-page">
