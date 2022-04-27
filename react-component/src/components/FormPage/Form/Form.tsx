@@ -24,7 +24,7 @@ export type IFormData = {
   agree: boolean;
 };
 
-export const Form: FC<IAddCardData> = (onAddCardData: IAddCardData) => {
+export const Form: FC<IAddCardData> = React.memo(({ addCardData }: IAddCardData) => {
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ export const Form: FC<IAddCardData> = (onAddCardData: IAddCardData) => {
       ...data,
     };
 
-    onAddCardData.addCardData(cardData);
+    addCardData(cardData);
     unDisabledBtn();
     reset();
 
@@ -159,4 +159,4 @@ export const Form: FC<IAddCardData> = (onAddCardData: IAddCardData) => {
       </button>
     </form>
   );
-};
+});
