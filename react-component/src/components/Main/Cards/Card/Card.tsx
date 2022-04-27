@@ -3,12 +3,11 @@ import { IRickAndMortyData } from '../CardsField';
 import './Card.css';
 
 interface ICardProp {
-  data: IRickAndMortyData;
+  props: IRickAndMortyData;
   open: (e: React.SyntheticEvent<EventTarget>) => void;
 }
-export const Card: FC<ICardProp> = (data: ICardProp) => {
-  const { id, image, name, status } = data.data;
-  const open = data.open;
+export const Card: FC<ICardProp> = React.memo(({ props, open }: ICardProp) => {
+  const { id, image, name, status } = props;
   return (
     <div className="main-card" data-testid="card" data-id={id}>
       <div className="main-card--img-wrapper">
@@ -23,4 +22,4 @@ export const Card: FC<ICardProp> = (data: ICardProp) => {
       </button>
     </div>
   );
-};
+});

@@ -26,7 +26,7 @@ const data: IRickAndMortyData = {
 
 describe('cards test', () => {
   beforeEach(() => {
-    render(<Card data={data} open={jest.fn()} />);
+    render(<Card props={data} open={jest.fn()} />);
   });
   test('Card renders', () => {
     expect(screen.getByText(/name/i)).toBeInTheDocument();

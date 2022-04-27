@@ -47,7 +47,7 @@ export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFi
   }, []);
 
   const elements = searchData.map((data: IRickAndMortyData) => (
-    <Card key={data.id} data={data} open={onOpen} />
+    <Card key={data.id} props={data} open={onOpen} />
   ));
   const id = searchData.map((item) => item.id).findIndex((id) => id === selectedValue);
   return (
