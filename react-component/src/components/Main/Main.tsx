@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
 import { Search } from './Search/Search';
 import { CardsField, IRickAndMortyData } from './Cards/CardsField';
 import { apiConstants } from '../../constants';
@@ -32,24 +32,27 @@ export const Main: FC = () => {
     }
   };
 
-  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    setError(false);
-    e.preventDefault();
-    setIsLoaded(true);
-    try {
-      const response = await fetch(`${apiConstants.characterUrl}/?name=${searchValue}`);
-      const data = await response.json();
-      if (!response.ok) {
-        throw Error('not found');
+  const onSubmit = useCallback(
+    async (e: React.ChangeEvent<HTMLFormElement>) => {
+      setError(false);
+      e.preventDefault();
+      setIsLoaded(true);
+      try {
+        const response = await fetch(`${apiConstants.characterUrl}/?name=${searchValue}`);
+        const data = await response.json();
+        if (!response.ok) {
+          throw Error('not found');
+        }
+        setSearchData(data.results);
+      } catch (err) {
+        setError(true);
+      } finally {
+        setIsLoaded(false);
+        setSearchValue('');
       }
-      setSearchData(data.results);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setIsLoaded(false);
-      setSearchValue('');
-    }
-  };
+    },
+    [searchValue]
+  );
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(event.target.value.toLowerCase());
   };
