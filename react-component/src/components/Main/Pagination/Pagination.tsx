@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { MainStateAction, MainStateKind } from '../../state/reducer';
+import { MainStateAction, MainStateKind } from '../../store/reducer';
 import './Pagination.css';
 
 export type paginationPropsType = {

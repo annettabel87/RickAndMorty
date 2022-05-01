@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGlobalMainContext } from '../../../state/context';
+import { useGlobalMainContext } from '../../../store/context';
 import './FullCard.css';
 
 export const FullCard: FC = React.memo(() => {

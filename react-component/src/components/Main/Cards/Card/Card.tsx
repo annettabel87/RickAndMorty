@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routers } from '../../../../constants';
-import { useGlobalMainContext } from '../../../state/context';
+import { useGlobalMainContext } from '../../../store/context';
 import { IRickAndMortyData } from '../CardsField';
 import './Card.css';
 

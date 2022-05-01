@@ -1,8 +1,10 @@
 import { FC, useCallback } from 'react';
 import { Form, IFormCard } from './Form/Form';
 import { CardsField } from './CardsField/CardsField';
-import { useGlobalFormContext } from '../state/formContext';
-import { ADD_CARD } from '../state/formReducer';
+import { formSlice } from '../store/formReducer';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
 import './FormPage.css';
 
 export type EmptyProps = Record<string, never>;
@@ -15,19 +17,21 @@ export type State = {
 };
 
 export const FormPage: FC = () => {
-  const { formstate, formDispatch } = useGlobalFormContext();
+  const formData = useSelector((state: RootState) => state.formReducer.data);
+  const { ADD_CARD } = formSlice.actions;
+  const dispatch: AppDispatch = useDispatch();
 
   const onAddCardData = useCallback(
     (data: IFormCard) => {
-      formDispatch({ type: ADD_CARD, payload: data });
+      dispatch(ADD_CARD(data));
     },
-    [formDispatch]
+    [ADD_CARD, dispatch]
   );
 
   return (
     <div className="form-container" data-testid="form-page">
       <Form addCardData={onAddCardData} />
-      <CardsField {...formstate} />
+      <CardsField {...formData} />
     </div>
   );
 };

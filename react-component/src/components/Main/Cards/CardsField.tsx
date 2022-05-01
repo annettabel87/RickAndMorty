@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Card } from './Card/Card';
-import { useGlobalMainContext } from '../../state/context';
-import { MainStateKind } from '../../state/reducer';
+import { useGlobalMainContext } from '../../store/context';
+import { MainStateKind } from '../../store/reducer';
 import './CardsField.css';
 
 export interface IRickAndMortyData {

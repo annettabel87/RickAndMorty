@@ -3,8 +3,8 @@ import { Search } from './Search/Search';
 import { CardsField } from './Cards/CardsField';
 import { apiConstants } from '../../constants';
 import { Loader } from './Loader/Loader';
-import { useGlobalMainContext } from '../state/context';
-import { MainStateKind } from '../state/reducer';
+import { useGlobalMainContext } from '../store/context';
+import { MainStateKind } from '../store/reducer';
 import { Pagination } from './Pagination/Pagination';
 import './Main.css';
 
@@ -104,7 +104,7 @@ export const Main: FC = () => {
       species,
       cardsCount,
     });
-  }, [searchValue, page, cardsCount, dispatch]);
+  }, [searchValue, page, cardsCount, dispatch, fetchData, status, species]);
 
   return (
     <div className="mainPage" data-testid="main-page">
