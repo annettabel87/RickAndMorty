@@ -1,14 +1,14 @@
 import React, { FC, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
 import { routers } from '../../../../constants';
 import { IRickAndMortyData, RootState } from '../../../../type/type';
+import { useAppSelector } from '../../../store/hooks';
 import './Card.css';
 
 export const Card: FC<IRickAndMortyData> = React.memo((data: IRickAndMortyData) => {
   const { id, image, name, status } = data;
-
-  const { selectCard } = useSelector((state: RootState) => state.mainReducer);
+  const { selectCard } = useAppSelector((state: RootState) => state.mainReducer);
   const navigate = useNavigate();
   useEffect(() => {
     if (!selectCard) {

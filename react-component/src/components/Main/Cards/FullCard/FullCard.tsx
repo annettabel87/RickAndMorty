@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../../../type/type';
+import { useAppSelector } from '../../../store/hooks';
 import './FullCard.css';
 
 export const FullCard: FC = React.memo(() => {
-  const { selectCard } = useSelector((state: RootState) => state.mainReducer);
+  const { selectCard } = useAppSelector((state) => state.mainReducer);
   const { name, status, image, species, gender, created } = selectCard;
   const navigate = useNavigate();
   const onBack = () => {

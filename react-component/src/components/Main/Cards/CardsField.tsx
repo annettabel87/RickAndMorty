@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Card } from './Card/Card';
 import { SELECT_CARD } from '../../store/mainReducer';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, CardFieldProps, IRickAndMortyData } from '../../../type/type';
+import { useAppDispatch } from '../../store/hooks';
+import { CardFieldProps, IRickAndMortyData } from '../../../type/type';
 import './CardsField.css';
 
 export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFieldProps) => {
   const [selectedValue, setSelectedValue] = useState(-1);
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const onOpen = (e: React.SyntheticEvent<EventTarget>) => {
     if (!(e.target instanceof HTMLElement)) {
       return;
