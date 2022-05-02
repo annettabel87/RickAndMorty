@@ -47,6 +47,7 @@ export const mainSlice = createSlice({
     DATA_FETCHING_ERROR(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
+      state.data = [];
     },
     SEARCH(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;

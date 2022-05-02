@@ -41,8 +41,8 @@ export const Main: FC = () => {
         <button className="reset-btn" onClick={reset}>
           reset
         </button>
-        {error && <span className="mainPage-error">not found</span>}
       </div>
+      {error && <span className="mainPage-error">not found</span>}
       <Pagination
         cardsCount={cardsCount}
         page={page}
