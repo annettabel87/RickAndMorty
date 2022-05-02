@@ -11,7 +11,7 @@ export interface IFormCard {
   birth: string;
   country: string;
   gender: string;
-  photo: FileList | null;
+  photo: string;
   agree: boolean;
 }
 export type IFormData = {
@@ -22,6 +22,11 @@ export type IFormData = {
   gender: string;
   photo: FileList | null;
   agree: boolean;
+};
+const createPhotoFile = (photo: FileList | null) => {
+  const url = photo ? URL.createObjectURL(new Blob([photo[0]])) : '';
+
+  return url;
 };
 
 export const Form: FC<IAddCardData> = React.memo(({ addCardData }: IAddCardData) => {
@@ -37,6 +42,7 @@ export const Form: FC<IAddCardData> = React.memo(({ addCardData }: IAddCardData)
     const cardData: IFormCard = {
       id: Date.now().toString(),
       ...data,
+      photo: createPhotoFile(data.photo),
     };
 
     addCardData(cardData);

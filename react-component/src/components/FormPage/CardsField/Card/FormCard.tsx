@@ -10,15 +10,10 @@ export const FormCard: FC<IFormCard> = ({
   gender,
   photo,
 }: IFormCard) => {
-  let url;
-  if (photo) {
-    const photoFile = new Blob([photo[0]]);
-    url = URL.createObjectURL(photoFile);
-  }
   return (
     <div className="card" data-testid="formCard">
       <div className="card--img-wrapper">
-        <img className="card-img" src={url} alt="image" />/
+        <img className="card-img" src={photo} alt="image" />/
       </div>
       <div className="card--description-wrapper">
         <div className="card--description-item">

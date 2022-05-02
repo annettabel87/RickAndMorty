@@ -8,7 +8,7 @@ const data = {
   birth: '12.09.1987',
   country: 'Russia',
   gender: 'Female',
-  photo: null,
+  photo: '',
   agree: true,
 };
 test('FormCard render', () => {
