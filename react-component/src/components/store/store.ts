@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import formReducer from './formReducer';
-
-//import { mainReducer } from './reducer';
+import mainReducer from './mainReducer';
 
 const rootReducer = combineReducers({
   formReducer,
+  mainReducer,
 });
 export const setupStore = () => {
   return configureStore({

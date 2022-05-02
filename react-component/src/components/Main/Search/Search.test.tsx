@@ -36,35 +36,28 @@ class LocalStorageMock {
     delete this.store[key];
   }
 }
-const mockForSearch = {
-  searchValue: 'rick',
-  onSubmit: jest.fn(),
-  reset: jest.fn(),
-  handleChange: jest.fn(),
-  sortValue: '',
-  setSortValue: jest.fn(),
-};
+
 describe('searchBar', () => {
   test('renders search component', () => {
-    render(<Search {...mockForSearch} />);
+    render(<Search />);
     const input = screen.getByTestId('search-input');
     expect(input).toBeInTheDocument();
   });
 
   test('render input if localStorage empty', () => {
-    render(<Search {...mockForSearch} />);
+    render(<Search />);
     expect(screen.getByTestId('search-input')).toBeInTheDocument();
   });
 
   test('render value from localStorage if it contain them', () => {
     localStorage = new LocalStorageMock();
-    const { rerender } = render(<Search {...mockForSearch} />);
+    const { rerender } = render(<Search />);
     userEvent.type(screen.getByTestId('search-input'), 'rick');
-    rerender(<Search {...mockForSearch} />);
+    rerender(<Search />);
     expect(screen.getByTestId('search-input')).toContainHTML('rick');
   });
   test('onchange works', () => {
-    render(<Search {...mockForSearch} />);
+    render(<Search />);
     const input = screen.getByTestId('search-input');
     userEvent.type(input, 'rick');
     expect(screen.getByTestId('search-input')).toContainHTML('rick');

@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Card } from './Card/Card';
-import { useGlobalMainContext } from '../../store/context';
-import { MainStateKind } from '../../store/reducer';
+import { SELECT_CARD } from '../../store/mainReducer';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
 import './CardsField.css';
 
 export interface IRickAndMortyData {
@@ -30,7 +31,7 @@ type CardFieldProps = {
 
 export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFieldProps) => {
   const [selectedValue, setSelectedValue] = useState(-1);
-  const { dispatch } = useGlobalMainContext();
+  const dispatch: AppDispatch = useDispatch();
   const onOpen = (e: React.SyntheticEvent<EventTarget>) => {
     if (!(e.target instanceof HTMLElement)) {
       return;
@@ -44,7 +45,7 @@ export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFi
     const idSelectElement = searchData
       .map((item) => item.id)
       .findIndex((id) => id === selectedValue);
-    dispatch({ type: MainStateKind.SELECT_CARD, payload: searchData[idSelectElement] });
+    dispatch(SELECT_CARD(searchData[idSelectElement]));
   }, [dispatch, searchData, selectedValue]);
 
   const elements = searchData.map((data: IRickAndMortyData) => <Card key={data.id} {...data} />);

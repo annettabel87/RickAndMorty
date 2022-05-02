@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { MainStateAction, MainStateKind } from '../../store/reducer';
+import { useAppDispatch } from '../../store/hooks';
+import { mainSlice } from '../../store/mainReducer';
 import './Pagination.css';
 
 export type paginationPropsType = {
@@ -7,7 +8,6 @@ export type paginationPropsType = {
   page: number;
   pages: string;
   onSelect: (value: string) => void;
-  dispatch: React.Dispatch<MainStateAction>;
 };
 
 export const Pagination: FC<paginationPropsType> = ({
@@ -15,13 +15,13 @@ export const Pagination: FC<paginationPropsType> = ({
   page,
   pages,
   onSelect,
-  dispatch,
 }: paginationPropsType) => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(false);
   const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
   const [showPage, setshowPage] = useState<number>(1);
   const [showPages, setshowPages] = useState<number>(1);
-
+  const { SET_PAGE } = mainSlice.actions;
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const showpage =
       cardsCount === '20' ? page : cardsCount === '40' ? Math.ceil(page / 2) : Math.ceil(page / 3);
@@ -48,11 +48,9 @@ export const Pagination: FC<paginationPropsType> = ({
           : cardsCount === '40'
           ? pageNumber - 2
           : pageNumber - 3;
-      pageNumber >= 2
-        ? dispatch({ type: MainStateKind.SET_PAGE, payload: payload })
-        : dispatch({ type: MainStateKind.SET_PAGE, payload: 1 });
+      pageNumber >= 2 ? dispatch(SET_PAGE(payload)) : dispatch(SET_PAGE(1));
     },
-    [cardsCount, dispatch]
+    [SET_PAGE, cardsCount, dispatch]
   );
 
   const nextPage = useCallback(
@@ -63,11 +61,9 @@ export const Pagination: FC<paginationPropsType> = ({
           : cardsCount === '40'
           ? pageNumber + 2
           : pageNumber + 3;
-      pageNumber < +pages
-        ? dispatch({ type: MainStateKind.SET_PAGE, payload: payload })
-        : dispatch({ type: MainStateKind.SET_PAGE, payload: pages });
+      pageNumber < +pages ? dispatch(SET_PAGE(payload)) : dispatch(SET_PAGE(+pages));
     },
-    [cardsCount, dispatch, pages]
+    [SET_PAGE, cardsCount, dispatch, pages]
   );
 
   return (

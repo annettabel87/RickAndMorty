@@ -1,19 +1,21 @@
 import React, { FC, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { routers } from '../../../../constants';
-import { useGlobalMainContext } from '../../../store/context';
+import { RootState } from '../../../store/store';
 import { IRickAndMortyData } from '../CardsField';
 import './Card.css';
 
 export const Card: FC<IRickAndMortyData> = React.memo((data: IRickAndMortyData) => {
   const { id, image, name, status } = data;
-  const { selectCard } = useGlobalMainContext();
+
+  const { selectCard } = useSelector((state: RootState) => state.mainReducer);
   const navigate = useNavigate();
   useEffect(() => {
     if (!selectCard) {
       navigate(routers.ROUTE_MAIN);
     }
-  });
+  }, [navigate, selectCard]);
   return (
     <div className="main-card" data-testid="card" data-id={id}>
       <div className="main-card--img-wrapper">

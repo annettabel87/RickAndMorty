@@ -1,121 +1,43 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Search } from './Search/Search';
 import { CardsField } from './Cards/CardsField';
-import { apiConstants } from '../../constants';
 import { Loader } from './Loader/Loader';
-import { useGlobalMainContext } from '../store/context';
-import { MainStateKind } from '../store/reducer';
+import { mainSlice } from '../store/mainReducer';
 import { Pagination } from './Pagination/Pagination';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fetchCharacters } from '../store/actionCreators';
 import './Main.css';
 
-export interface ISearchProps {
-  searchValue: string;
-  onSubmit: (e: React.ChangeEvent<HTMLFormElement>, value: string) => void;
-  sortValue: string;
-  setSortValue: React.Dispatch<React.SetStateAction<string>>;
-}
-interface SearchParameters {
-  page: number;
-  name?: string;
-  status?: string;
-  species?: string;
-  cardsCount: string;
-}
 export const Main: FC = () => {
-  const [error, setError] = useState<boolean>(false);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [status, setStatus] = useState<string>('');
   const [species, setSpecies] = useState<string>('');
-  const [pages, setPages] = useState<string>('');
-  const [sortValue, setSortValue] = useState<string>('default');
-  const { state, searchValue, cardsCount, page, dispatch } = useGlobalMainContext();
 
-  const fetchData = useCallback(
-    async ({ page = 1, name, status, species, cardsCount }: SearchParameters) => {
-      const query = `page=${page}&name=${name}&status=${status}&species=${species}`;
-      setError(false);
-      try {
-        const response = await fetch(`${apiConstants.characterUrl}?${query}`);
-        const data = await response.json();
-        if (!response.ok) {
-          throw Error('not found');
-        }
-        if (cardsCount === '40') {
-          fetch(data.info.next)
-            .then((res) => res.json())
-            .then((nextData) => {
-              dispatch({
-                type: MainStateKind.ADD,
-                payload: [...data.results, ...nextData.results],
-              });
-            });
-        } else if (cardsCount === '20') {
-          dispatch({ type: MainStateKind.ADD, payload: data.results });
-        } else if (cardsCount === '60') {
-          fetch(data.info.next)
-            .then((res) => res.json())
-            .then((nextData) => {
-              fetch(nextData.info.next)
-                .then((res) => res.json())
-                .then((nextNextData) => {
-                  dispatch({
-                    type: MainStateKind.ADD,
-                    payload: [...data.results, ...nextData.results, ...nextNextData.results],
-                  });
-                });
-            });
-        }
-        setPages(data.info.pages);
-      } catch (err) {
-        setError(true);
-      } finally {
-        setIsLoaded(false);
-      }
-    },
-    [dispatch]
-  );
+  const { data, page, pages, searchValue, cardsCount, isLoading, error, sortValue } =
+    useAppSelector((state) => state.mainReducer);
+  const { SEARCH, SELECT_COUNT_CARDS, SET_PAGE, SET_SORT } = mainSlice.actions;
+  const dispatch = useAppDispatch();
+
   const onSelect = async (value: string) => {
-    dispatch({ type: MainStateKind.SELECT_COUNT_CARDS, payload: value });
+    dispatch(SELECT_COUNT_CARDS(value));
   };
-  const onSubmit = useCallback(
-    async (e: React.ChangeEvent<HTMLFormElement>, value: string) => {
-      setError(false);
-      e.preventDefault();
-      setIsLoaded(true);
-      dispatch({ type: MainStateKind.SEARCH, payload: value });
-    },
-    [dispatch]
-  );
-  useEffect(() => {
-    dispatch({ type: MainStateKind.SORT, payload: sortValue });
-  }, [dispatch, sortValue]);
+
   const reset = () => {
-    dispatch({ type: MainStateKind.SET_PAGE, payload: 1 });
-    dispatch({ type: MainStateKind.SEARCH, payload: '' });
+    dispatch(SET_PAGE(1));
+    dispatch(SEARCH(''));
     setStatus('');
     setSpecies('');
-    setSortValue('');
+    dispatch(SET_SORT(''));
   };
   useEffect(() => {
-    fetchData({
-      page,
-      name: searchValue,
-      status,
-      species,
-      cardsCount,
-    });
-  }, [searchValue, page, cardsCount, dispatch, fetchData, status, species]);
+    const query = `page=${page}&name=${searchValue}&status=${status}&species=${species}`;
+    dispatch(fetchCharacters({ query, cardsCount, sortValue }));
+  }, [cardsCount, dispatch, page, searchValue, sortValue, species, status]);
 
   return (
     <div className="mainPage" data-testid="main-page">
       <h2 className="mainPage-title">Rick and Morty</h2>
       <div className="search-block">
-        <Search
-          searchValue={searchValue}
-          onSubmit={onSubmit}
-          sortValue={sortValue}
-          setSortValue={setSortValue}
-        />
+        <Search />
         <button className="reset-btn" onClick={reset}>
           reset
         </button>
@@ -124,16 +46,15 @@ export const Main: FC = () => {
       <Pagination
         cardsCount={cardsCount}
         page={page}
-        pages={pages}
+        pages={pages.toString()}
         onSelect={onSelect}
-        dispatch={dispatch}
       />
-      {isLoaded ? (
+      {isLoading ? (
         <div className="loader">
           <Loader />
         </div>
       ) : (
-        <CardsField searchData={state} />
+        <CardsField searchData={data} />
       )}
     </div>
   );
