@@ -2,8 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { routers } from '../../../../constants';
-import { RootState } from '../../../store/store';
-import { IRickAndMortyData } from '../CardsField';
+import { IRickAndMortyData, RootState } from '../../../../type/type';
 import './Card.css';
 
 export const Card: FC<IRickAndMortyData> = React.memo((data: IRickAndMortyData) => {

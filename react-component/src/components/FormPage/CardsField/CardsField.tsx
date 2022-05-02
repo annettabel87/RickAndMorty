@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IFormCard } from '../Form/Form';
+import { IFormCard } from '../../../type/type';
 import { FormCard } from './Card/FormCard';
 import './CardsField.css';
 

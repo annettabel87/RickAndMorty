@@ -2,10 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Search } from './Search';
 import userEvent from '@testing-library/user-event';
+import { Store } from '../../../type/type';
 
-interface Store {
-  [key: string]: string;
-}
 class LocalStorageMock {
   store: Store;
   length: number;

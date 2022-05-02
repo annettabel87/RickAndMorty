@@ -1,17 +1,6 @@
-import { IRickAndMortyData } from '../Main/Cards/CardsField';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { mainStateType, IRickAndMortyData } from '../../type/type';
 
-type mainStateType = {
-  data: IRickAndMortyData[];
-  searchValue: string;
-  cardsCount: string;
-  page: number;
-  pages: number;
-  sortValue: string;
-  selectCard: IRickAndMortyData;
-  isLoading: boolean;
-  error: string;
-};
 export const initialState: mainStateType = {
   data: [],
   searchValue: '',
@@ -42,16 +31,6 @@ export const initialState: mainStateType = {
   isLoading: false,
   error: '',
 };
-
-export interface IFetchData {
-  info: {
-    count: number;
-    pages: number;
-    next: string;
-    prev: string | null;
-  };
-  results: IRickAndMortyData[];
-}
 
 export const mainSlice = createSlice({
   name: 'main',

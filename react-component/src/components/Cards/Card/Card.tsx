@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ICardData } from '../Cards';
+import { ICardData } from '../../../type/type';
 import './Card.css';
 
 export const Card: FC<ICardData> = (data: ICardData) => {

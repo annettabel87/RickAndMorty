@@ -2,32 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { Card } from './Card/Card';
 import { SELECT_CARD } from '../../store/mainReducer';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
+import { AppDispatch, CardFieldProps, IRickAndMortyData } from '../../../type/type';
 import './CardsField.css';
-
-export interface IRickAndMortyData {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
-}
-type CardFieldProps = {
-  searchData: IRickAndMortyData[];
-};
 
 export const CardsField: FC<CardFieldProps> = React.memo(({ searchData }: CardFieldProps) => {
   const [selectedValue, setSelectedValue] = useState(-1);

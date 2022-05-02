@@ -1,14 +1,8 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
+import { paginationPropsType } from '../../../type/type';
 import { useAppDispatch } from '../../store/hooks';
 import { mainSlice } from '../../store/mainReducer';
 import './Pagination.css';
-
-export type paginationPropsType = {
-  cardsCount: string;
-  page: number;
-  pages: string;
-  onSelect: (value: string) => void;
-};
 
 export const Pagination: FC<paginationPropsType> = ({
   cardsCount,

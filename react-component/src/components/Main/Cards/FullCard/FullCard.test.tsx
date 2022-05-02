@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IRickAndMortyData } from '../CardsField';
+import { IRickAndMortyData } from '../../../../type/type';
 import { FullCard } from './FullCard';
 
 const data: IRickAndMortyData = {

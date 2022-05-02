@@ -1,15 +1,8 @@
 import React, { FC } from 'react';
 import cardsData from '../../cardsData.json';
+import { ICardData } from '../../type/type';
 import { Card } from './Card/Card';
 import './Cards.css';
-
-export interface ICardData {
-  id: number;
-  name: string;
-  price: number;
-  age: string;
-  details: number;
-}
 
 const cardsElement = cardsData.map((data: ICardData) => (
   <Card key={data.id.toString()} {...data} />

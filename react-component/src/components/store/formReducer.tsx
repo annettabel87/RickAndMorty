@@ -1,17 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IFormCard } from '../FormPage/Form/Form';
+import { FormStateType, IFormCard } from '../../type/type';
 
-export type FormStateType = {
-  data: IFormCard[];
-};
 export const initialState: FormStateType = {
   data: [],
 };
 
-export interface FormStateAction {
-  type: string;
-  payload: IFormCard;
-}
 export const formSlice = createSlice({
   name: 'form',
   initialState,

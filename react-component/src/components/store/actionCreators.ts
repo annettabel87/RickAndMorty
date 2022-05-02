@@ -1,13 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiConstants, valueToSort } from '../../constants';
-import { IRickAndMortyData } from '../Main/Cards/CardsField';
-import { IFetchData, mainSlice } from './mainReducer';
-
-export type fetchCharactersPropsType = {
-  query: string;
-  cardsCount: string;
-  sortValue: string;
-};
+import { fetchCharactersPropsType, IFetchData, IRickAndMortyData } from '../../type/type';
+import { mainSlice } from './mainReducer';
 
 const sort = (array: IRickAndMortyData[], value: string) => {
   const copyArray = [...array];

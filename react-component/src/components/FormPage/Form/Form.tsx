@@ -1,28 +1,9 @@
 import React, { FC, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { validateConstants } from '../../../constants';
-import { IAddCardData } from '../FormPage';
+import { IAddCardData, IFormCard, IFormData } from '../../../type/type';
 import './Form.css';
 
-export interface IFormCard {
-  id: string;
-  name: string;
-  surname: string;
-  birth: string;
-  country: string;
-  gender: string;
-  photo: string;
-  agree: boolean;
-}
-export type IFormData = {
-  name: string;
-  surname: string;
-  birth: string;
-  country: string;
-  gender: string;
-  photo: FileList | null;
-  agree: boolean;
-};
 const createPhotoFile = (photo: FileList | null) => {
   const url = photo ? URL.createObjectURL(new Blob([photo[0]])) : '';
 

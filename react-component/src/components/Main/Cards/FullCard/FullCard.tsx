@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../../type/type';
 import './FullCard.css';
 
 export const FullCard: FC = React.memo(() => {
