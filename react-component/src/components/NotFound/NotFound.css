@@ -1,0 +1,13 @@
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.error-title {
+    font-size: 60px;
+    color: red;
+}
+.error-description {
+    font-size: 30px;
+}
