@@ -1,2 +1,12 @@
-# annettabel87-REACT2022Q1
-Private repository for @annettabel87
+# react-redux
+
+
+### Deploy: https://annettabel87-react-redux.netlify.app/
+
+### Use:
+- React
+- typeScript
+- Redux Toolkit
+- React Hook Form
+- -API: https://rickandmortyapi.com/documentation/
+- react testing library
